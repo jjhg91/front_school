@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  front_school:
+    container_name: front_school
+    image: node:14-alpine
+    volumes:
+      - ./:/app:cached
+      - /app/node_modules/
+    working_dir: /app
+    ports:
+      - 3009:3030
+    #expose:
+    #    - 80
+    #environment:
+    #    - VIRTUAL_HOST=zonaprofesor.iutjmc.com.ve
+    environment:
+      - WATCHPACK_POLLING=true
+
+    command: [sh, -c, "npm install && npm start"]
+    tty: true
+
+networks:
+  default:
+    name: cloud_default
