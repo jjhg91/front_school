@@ -23,7 +23,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 import { fTimestamp } from '../../utils/formatTime';
 // _mock_
-// import { _invoices } from '../../_mock/arrays';
+// import { _shifts } from '../../_mock/arrays';
 // components
 import Label from '../../components/label';
 import Iconify from '../../components/iconify';
@@ -61,9 +61,8 @@ const SERVICE_OPTIONS = [
 
 const TABLE_HEAD = [
   { id: 'shift', label: 'Shift', align: 'left' },
-  { id: 'inscription', label: 'inscription', align: 'left' },
-  { id: 'monthly_payment', label: 'monthly payment', align: 'left' },
-  { id: 'createAt', label: 'Create', align: 'left' },
+  { id: 'description', label: 'Description', align: 'left' },
+  { id: 'createdAt', label: 'Create', align: 'left' },
   { id: 'isActive', label: 'Status', align: 'left' },
   { id: '' },
 ];
@@ -99,7 +98,7 @@ export default function ShiftListPage() {
     onChangeDense,
     onChangePage,
     onChangeRowsPerPage,
-  } = useTable({ defaultOrderBy: 'createDate' });
+  } = useTable({ defaultOrderBy: 'createdAt' });
 
   const [tableData, setTableData] = useState(shifts);
 
@@ -261,11 +260,11 @@ export default function ShiftListPage() {
           action={
             <Button
               component={RouterLink}
-              to={PATH_DASHBOARD.invoice.new}
+              to={PATH_DASHBOARD.shift.new}
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Invoice
+              New Shift
             </Button>
           }
         />
@@ -513,27 +512,27 @@ function applyFilter({
 
   if (filterName) {
     inputData = inputData.filter(
-      (invoice) =>
-        invoice.description.toLowerCase().indexOf(filterName.toLowerCase()) !== -1 ||
-        invoice.abbreviation.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
+      (shift) =>
+        shift.description.toLowerCase().indexOf(filterName.toLowerCase()) !== -1 ||
+        shift.abbreviation.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
     );
   }
 
   if (filterStatus !== 'all') {
-    inputData = inputData.filter((invoice) => invoice.isActive === filterStatus);
+    inputData = inputData.filter((shift) => shift.isActive === filterStatus);
   }
 
   if (filterService !== 'all') {
-    inputData = inputData.filter((invoice) =>
-      invoice.items.some((c) => c.service === filterService)
+    inputData = inputData.filter((shift) =>
+      shift.items.some((c) => c.service === filterService)
     );
   }
 
   if (filterStartDate && filterEndDate) {
     inputData = inputData.filter(
-      (invoice) =>
-        fTimestamp(invoice.createDate) >= fTimestamp(filterStartDate) &&
-        fTimestamp(invoice.createDate) <= fTimestamp(filterEndDate)
+      (shift) =>
+        fTimestamp(shift.createdAt) >= fTimestamp(filterStartDate) &&
+        fTimestamp(shift.createdAt) <= fTimestamp(filterEndDate)
     );
   }
 

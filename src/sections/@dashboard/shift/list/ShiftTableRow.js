@@ -24,7 +24,7 @@ import ConfirmDialog from '../../../../components/confirm-dialog';
 
 // ----------------------------------------------------------------------
 
-BecaTableRow.propTypes = {
+ShiftTableRow.propTypes = {
   row: PropTypes.object,
   selected: PropTypes.bool,
   onEditRow: PropTypes.func,
@@ -33,7 +33,7 @@ BecaTableRow.propTypes = {
   onSelectRow: PropTypes.func,
 };
 
-export default function BecaTableRow({
+export default function ShiftTableRow({
   row,
   selected,
   onSelectRow,
@@ -42,7 +42,7 @@ export default function BecaTableRow({
   onDeleteRow,
 }) {
   // const { sent, invoiceNumber, createDate, dueDate, status, invoiceTo, totalPrice } = row;
-  const { name_beca,inscription, monthly_payment, isActive, createdAt } = row;
+  const { name_shift,description, isActive, createdAt } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -71,9 +71,8 @@ export default function BecaTableRow({
           <Checkbox checked={selected} onClick={onSelectRow} />
         </TableCell>
 
-        <TableCell align="left">{name_beca}</TableCell>
-        <TableCell align="left">{inscription}%</TableCell>
-        <TableCell align="left">{monthly_payment}%</TableCell>
+        <TableCell align="left">{name_shift}</TableCell>
+        <TableCell align="left">{description}</TableCell>
         <TableCell align="left">{fDate(createdAt)}</TableCell>
 
         <TableCell align="left">

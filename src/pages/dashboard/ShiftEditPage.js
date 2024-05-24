@@ -6,7 +6,7 @@ import { Container } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
-import { _invoices } from '../../_mock/arrays';
+// import { _invoices } from '../../_mock/arrays';
 // components
 import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
@@ -29,7 +29,7 @@ export default function ShiftEditPage() {
 
   const { id } = useParams();
 
-  const currentInvoice = _invoices.find((invoice) => invoice.id === id);
+  // const currentShift = _invoices.find((invoice) => invoice.id === id);
 
   useEffect(() => {
     dispatch(getShift(id));
@@ -42,22 +42,22 @@ export default function ShiftEditPage() {
   return (
     <>
       <Helmet>
-        <title> Invoice: Edit | Minimal UI</title>
+        <title> Shift: Edit | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Edit invoice"
+          heading="Edit shift"
           links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Invoices',
-              href: PATH_DASHBOARD.invoice.list,
+              name: 'Shifts',
+              href: PATH_DASHBOARD.shift.list,
             },
-            { name: `INV-${currentInvoice?.invoiceNumber}` },
+            { name: currentShift?.name_shift },
           ]}
         />
 

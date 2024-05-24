@@ -8,7 +8,7 @@ import Iconify from '../../../../components/iconify';
 
 const INPUT_WIDTH = 160;
 
-BecaTableToolbar.propTypes = {
+ModalityTableToolbar.propTypes = {
   isFiltered: PropTypes.bool,
   filterName: PropTypes.string,
   onFilterName: PropTypes.func,
@@ -22,7 +22,7 @@ BecaTableToolbar.propTypes = {
   optionsService: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default function BecaTableToolbar({
+export default function ModalityTableToolbar({
   isFiltered,
   filterName,
   onFilterName,

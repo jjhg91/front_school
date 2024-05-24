@@ -49,28 +49,13 @@ export default function ShiftNewEditForm({ isEdit = false, currentShift, updateS
 
   const NewShiftSchema = Yup.object().shape({
     name_shift: Yup.string().required('Name shift is required'),
-    rif: Yup.string().required('Rif or C.I is required'),
     description: Yup.string().required('Name shift is required'),
-    inscription: Yup.string().required('Porcentaje incripcion de shift required'),
-    monthly_payment: Yup.string().required('porcentaje de mensualidad shift is required'),
-    given_by: Yup.string().required('Nombre de contacto de shift required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    phoneNumber_1: Yup.string().required('Phone Number 1 is required'),
-    phoneNumber_2: Yup.string().nullable(true),
-    logoUrl: Yup.string().nullable(true),
     });
 
   const defaultValues = useMemo(
     () => ({
       name_shift: currentShift?.name_shift || '',
-      rif: currentShift?.rif || '',
       description: currentShift?.description || '',
-      inscription: currentShift?.inscription || '',
-      monthly_payment: currentShift?.monthly_payment || '',
-      given_by: currentShift?.given_by || '',
-      email: currentShift?.email || '',
-      phoneNumber_1: currentShift?.phoneNumber_1 || '',
-      phoneNumber_2: currentShift?.phoneNumber_2 || '', 
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentShift]
@@ -234,13 +219,6 @@ export default function ShiftNewEditForm({ isEdit = false, currentShift, updateS
             >
               <RHFTextField name="name_shift" label="Nombre" />
               <RHFTextField name="description" label="Descripcion" />
-              <RHFTextField name="rif" label="Rif" />
-              <RHFTextField name="inscription" label="Porcentaje inscripcion" />
-              <RHFTextField name="monthly_payment" label="Porcentaje mensualidad" />
-              <RHFTextField name="given_by" label="Nombre de contacto" />
-              <RHFTextField name="email" label="Email" />
-              <RHFTextField name="phoneNumber_1" label="Phone Number 1" />
-              <RHFTextField name="phoneNumber_2" label="Phone Number 2" />
 {/* 
               <RHFSelect native name="country" label="Country" placeholder="Country">
                 <option value="" />
