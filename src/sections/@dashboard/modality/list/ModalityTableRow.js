@@ -42,7 +42,7 @@ export default function ModalityTableRow({
   onDeleteRow,
 }) {
   // const { sent, invoiceNumber, createDate, dueDate, status, invoiceTo, totalPrice } = row;
-  const { name_modality,inscription, monthly_payment, isActive, createdAt } = row;
+  const { name_modality,description, isActive, createdAt } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -72,8 +72,7 @@ export default function ModalityTableRow({
         </TableCell>
 
         <TableCell align="left">{name_modality}</TableCell>
-        <TableCell align="left">{inscription}%</TableCell>
-        <TableCell align="left">{monthly_payment}%</TableCell>
+        <TableCell align="left">{description}</TableCell>
         <TableCell align="left">{fDate(createdAt)}</TableCell>
 
         <TableCell align="left">

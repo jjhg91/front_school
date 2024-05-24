@@ -97,7 +97,7 @@ export default function SchoolListPage() {
     onChangeDense,
     onChangePage,
     onChangeRowsPerPage,
-  } = useTable({ defaultOrderBy: 'createDate' });
+  } = useTable({ defaultOrderBy: 'createdAt' });
 
   const [tableData, setTableData] = useState(schools);
 
@@ -530,8 +530,8 @@ function applyFilter({
   if (filterStartDate && filterEndDate) {
     inputData = inputData.filter(
       (invoice) =>
-        fTimestamp(invoice.createDate) >= fTimestamp(filterStartDate) &&
-        fTimestamp(invoice.createDate) <= fTimestamp(filterEndDate)
+        fTimestamp(invoice.createdAt) >= fTimestamp(filterStartDate) &&
+        fTimestamp(invoice.createdAt) <= fTimestamp(filterEndDate)
     );
   }
 

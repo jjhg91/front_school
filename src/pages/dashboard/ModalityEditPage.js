@@ -6,7 +6,7 @@ import { Container } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
-import { _invoices } from '../../_mock/arrays';
+// import { _invoices } from '../../_mock/arrays';
 // components
 import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
@@ -29,7 +29,7 @@ export default function ModalityEditPage() {
 
   const { id } = useParams();
 
-  const currentInvoice = _invoices.find((invoice) => invoice.id === id);
+  // const currentModality = _invoices.find((invoice) => invoice.id === id);
 
   useEffect(() => {
     dispatch(getModality(id));
@@ -42,22 +42,22 @@ export default function ModalityEditPage() {
   return (
     <>
       <Helmet>
-        <title> Invoice: Edit | Minimal UI</title>
+        <title> Modality: Edit | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Edit invoice"
+          heading="Edit modality"
           links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Invoices',
-              href: PATH_DASHBOARD.invoice.list,
+              name: 'Modalitys',
+              href: PATH_DASHBOARD.modality.list,
             },
-            { name: `INV-${currentInvoice?.invoiceNumber}` },
+            { name: currentModality?.name_modality },
           ]}
         />
 

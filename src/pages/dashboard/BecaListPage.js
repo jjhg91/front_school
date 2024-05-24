@@ -63,7 +63,7 @@ const TABLE_HEAD = [
   { id: 'beca', label: 'Beca', align: 'left' },
   { id: 'inscription', label: 'inscription', align: 'left' },
   { id: 'monthly_payment', label: 'monthly payment', align: 'left' },
-  { id: 'createAt', label: 'Create', align: 'left' },
+  { id: 'createdAt', label: 'Create', align: 'left' },
   { id: 'isActive', label: 'Status', align: 'left' },
   { id: '' },
 ];
@@ -99,7 +99,7 @@ export default function BecaListPage() {
     onChangeDense,
     onChangePage,
     onChangeRowsPerPage,
-  } = useTable({ defaultOrderBy: 'createDate' });
+  } = useTable({ defaultOrderBy: 'createdAt' });
 
   const [tableData, setTableData] = useState(becas);
 
@@ -532,8 +532,8 @@ function applyFilter({
   if (filterStartDate && filterEndDate) {
     inputData = inputData.filter(
       (invoice) =>
-        fTimestamp(invoice.createDate) >= fTimestamp(filterStartDate) &&
-        fTimestamp(invoice.createDate) <= fTimestamp(filterEndDate)
+        fTimestamp(invoice.createdAt) >= fTimestamp(filterStartDate) &&
+        fTimestamp(invoice.createdAt) <= fTimestamp(filterEndDate)
     );
   }
 

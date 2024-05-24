@@ -42,7 +42,7 @@ import {
   TablePaginationCustom,
 } from '../../components/table';
 // sections
-import InvoiceAnalytic from '../../sections/@dashboard/modality/InvoiceAnalytic';
+import InvoiceAnalytic from '../../sections/@dashboard/invoice/InvoiceAnalytic';
 import { ModalityTableRow, ModalityTableToolbar } from '../../sections/@dashboard/modality/list';
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
@@ -61,9 +61,8 @@ const SERVICE_OPTIONS = [
 
 const TABLE_HEAD = [
   { id: 'modality', label: 'Modality', align: 'left' },
-  { id: 'inscription', label: 'inscription', align: 'left' },
-  { id: 'monthly_payment', label: 'monthly payment', align: 'left' },
-  { id: 'createAt', label: 'Create', align: 'left' },
+  { id: 'description', label: 'Description', align: 'left' },
+  { id: 'createdAt', label: 'Create', align: 'left' },
   { id: 'isActive', label: 'Status', align: 'left' },
   { id: '' },
 ];
@@ -99,7 +98,7 @@ export default function ModalityListPage() {
     onChangeDense,
     onChangePage,
     onChangeRowsPerPage,
-  } = useTable({ defaultOrderBy: 'createAt' });
+  } = useTable({ defaultOrderBy: 'createdAt' });
 
   const [tableData, setTableData] = useState(modalitys);
 
@@ -532,8 +531,8 @@ function applyFilter({
   if (filterStartDate && filterEndDate) {
     inputData = inputData.filter(
       (modality) =>
-        fTimestamp(modality.createAt) >= fTimestamp(filterStartDate) &&
-        fTimestamp(modality.createAt) <= fTimestamp(filterEndDate)
+        fTimestamp(modality.createdAt) >= fTimestamp(filterStartDate) &&
+        fTimestamp(modality.createdAt) <= fTimestamp(filterEndDate)
     );
   }
 

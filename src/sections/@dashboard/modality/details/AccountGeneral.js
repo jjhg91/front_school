@@ -63,92 +63,23 @@ export default function AccountGeneral({modality}) {
             <CardHeader title="Modality information"/>
             <CardContent>
               <Stack spacing={5} alignItems="flex-start">
-                <Box sx={{ mb: 5 }}>
+                <Box>
                   <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
                     Name Modality
                   </Typography>
                   <Typography variant="body2">{modality?.name_modality}</Typography>
-                  <Typography variant="caption" sx={{ color:'text.disabled'}}><i>{modality?.description}</i></Typography>
+                </Box>
+                <Box>
+                  <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
+                  Description
+                  </Typography>
+                  <Typography variant="body2">{modality?.description}</Typography>
                 </Box>
               </Stack>
-              <Grid container spacing={5}>
-                <Grid item xs={6} sm={6} >
-                  <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-                    Rif
-                  </Typography>
-                  <Typography variant="body2">{modality?.rif}</Typography>
-                </Grid>
-                <Grid item xs={6} sm={6}>
-                  <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-                    direccion
-                  </Typography>
-                  <Typography variant="body2">{modality?.address}</Typography>
-                </Grid>
-              </Grid>
             </CardContent>
             </Card>
-
-            <Card >
-              <CardHeader title="Modality benefits" />
-              <CardContent>
-                <Grid container spacing={5}>
-                  <Grid item xs={6} sm={6}>
-                    <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-                      Inscription
-                    </Typography>
-                    <Typography variant="body2">{modality?.inscription}%</Typography>
-                  </Grid>
-                  <Grid item xs={6} sm={6}>
-                    <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-                      Monthly payments
-                    </Typography>
-                    <Typography variant="body2">{modality?.monthly_payment}%</Typography>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-
-            <Card >
-              <CardHeader title="Modality contact" />
-              
-            <CardContent>
-
-            {/* <Box  sx={{ mb: 5 }}> */}
-              {/* <Divider textAlign='left' sx={{ borderStyle: 'dashed', mb: 5 }}> */}
-                {/* <Typography variant='h6'> INFORMACION DE CONTACTO</Typography> */}
-              {/* </Divider> */}
-              <Grid container spacing={5}>
-                <Grid item xs={12} sm={6}>
-                  <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-                    nombre de contacto
-                  </Typography>
-                  <Typography variant="body2">{modality?.given_by}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-                    Email de contacto
-                  </Typography>
-                  <Typography variant="body2">{modality?.email}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-                    numero de contacto
-                  </Typography>
-                  <Typography variant="body2">{modality?.phoneNumber_1}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-                    numero de contacto 2
-                  </Typography>
-                  <Typography variant="body2">{modality?.phoneNumber_2}</Typography>
-                </Grid>
-              </Grid>
-        </CardContent>
-            {/* </Box> */}
-          </Card>
         </Stack>
         </Grid>
-        
       // </Grid>
     // </FormProvider>
     );
