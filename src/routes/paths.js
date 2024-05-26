@@ -96,6 +96,20 @@ export const PATH_DASHBOARD = {
     view: (id) => path(ROOTS_DASHBOARD, `/shift/${id}`),
     edit: (id) => path(ROOTS_DASHBOARD, `/shift/${id}/edit`),
   },
+  period: {
+    root: path(ROOTS_DASHBOARD, '/period'),
+    list: path(ROOTS_DASHBOARD, '/period/list'),
+    new: path(ROOTS_DASHBOARD, '/period/new'),
+    view: (id) => path(ROOTS_DASHBOARD, `/period/${id}`),
+    edit: (id) => path(ROOTS_DASHBOARD, `/period/${id}/edit`),
+  },
+  speciality: {
+    root: path(ROOTS_DASHBOARD, '/speciality'),
+    list: path(ROOTS_DASHBOARD, '/speciality/list'),
+    new: path(ROOTS_DASHBOARD, '/speciality/new'),
+    view: (id) => path(ROOTS_DASHBOARD, `/speciality/${id}`),
+    edit: (id) => path(ROOTS_DASHBOARD, `/speciality/${id}/edit`),
+  },
   eCommerce: {
     root: path(ROOTS_DASHBOARD, '/e-commerce'),
     shop: path(ROOTS_DASHBOARD, '/e-commerce/shop'),

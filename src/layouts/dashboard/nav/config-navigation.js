@@ -59,7 +59,7 @@ const navConfig = [
       },
 
        // SCHOOL
-       {
+      {
         title: 'school',
         path: PATH_DASHBOARD.school.root,
         icon: ICONS.banking,
@@ -72,7 +72,7 @@ const navConfig = [
       },
 
        // BECA
-       {
+      {
         title: 'beca',
         path: PATH_DASHBOARD.beca.root,
         icon: ICONS.blog,
@@ -85,7 +85,7 @@ const navConfig = [
       },
 
        // MODALITY
-       {
+      {
         title: 'modality',
         path: PATH_DASHBOARD.modality.root,
         icon: ICONS.blank,
@@ -98,7 +98,7 @@ const navConfig = [
       },
 
        // SHIFT
-       {
+      {
         title: 'shift',
         path: PATH_DASHBOARD.shift.root,
         icon: ICONS.dashboard,
@@ -109,6 +109,32 @@ const navConfig = [
           // { title: 'edit', path: PATH_DASHBOARD.shift.demoEdit },
         ],
       },
+
+      // PERIODO
+      {
+        title: 'periodo',
+        path: PATH_DASHBOARD.period.root,
+        icon: ICONS.calendar,
+        children: [
+          { title: 'list', path: PATH_DASHBOARD.period.list },
+          // { title: 'details', path: PATH_DASHBOARD.invoice.demoView },
+          { title: 'create', path: PATH_DASHBOARD.period.new },
+          // { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
+        ],
+      },
+
+         // SPECIALITY
+        {
+          title: 'especialdiad',
+          path: PATH_DASHBOARD.speciality.root,
+          icon: ICONS.kanban,
+          children: [
+            { title: 'list', path: PATH_DASHBOARD.speciality.list },
+            // { title: 'details', path: PATH_DASHBOARD.invoice.demoView },
+            { title: 'create', path: PATH_DASHBOARD.speciality.new },
+            // { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
+          ],
+        },
 
       // INVOICE
       {
@@ -123,21 +149,8 @@ const navConfig = [
         ],
       },
 
-       // ESPECIALIDAD
-       {
-        title: 'especialidades',
-        path: PATH_DASHBOARD.invoice.root,
-        icon: ICONS.kanban,
-        children: [
-          { title: 'list', path: PATH_DASHBOARD.invoice.list },
-          { title: 'details', path: PATH_DASHBOARD.invoice.demoView },
-          { title: 'create', path: PATH_DASHBOARD.invoice.new },
-          // { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
-        ],
-      },
-
        // CURSO
-       {
+      {
         title: 'cursos',
         path: PATH_DASHBOARD.invoice.root,
         icon: ICONS.folder,
@@ -154,19 +167,6 @@ const navConfig = [
         title: 'pensum',
         path: PATH_DASHBOARD.invoice.root,
         icon: ICONS.booking,
-        children: [
-          { title: 'list', path: PATH_DASHBOARD.invoice.list },
-          { title: 'details', path: PATH_DASHBOARD.invoice.demoView },
-          { title: 'create', path: PATH_DASHBOARD.invoice.new },
-          // { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
-        ],
-      },
-
-      // PERIODO
-      {
-        title: 'periodo',
-        path: PATH_DASHBOARD.invoice.root,
-        icon: ICONS.calendar,
         children: [
           { title: 'list', path: PATH_DASHBOARD.invoice.list },
           { title: 'details', path: PATH_DASHBOARD.invoice.demoView },

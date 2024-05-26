@@ -51,6 +51,16 @@ import {
   ShiftDetailsPage,
   ShiftCreatePage,
   ShiftEditPage,
+  // Dashboard: Period
+  PeriodListPage,
+  PeriodDetailsPage,
+  PeriodCreatePage,
+  PeriodEditPage,
+  // Dashboard: Speciality
+  SpecialityListPage,
+  SpecialityDetailsPage,
+  SpecialityCreatePage,
+  SpecialityEditPage,
   // Dashboard: Ecommerce
   EcommerceShopPage,
   EcommerceCheckoutPage,
@@ -263,6 +273,26 @@ export default function Router() {
             { path: ':id', element: <ShiftDetailsPage /> },
             { path: ':id/edit', element: <ShiftEditPage /> },
             { path: 'new', element: <ShiftCreatePage /> },
+          ],
+        },
+        {
+          path: 'period',
+          children: [
+            { element: <Navigate to="/dashboard/period/list" replace />, index: true },
+            { path: 'list', element: <PeriodListPage /> },
+            { path: ':id', element: <PeriodDetailsPage /> },
+            { path: ':id/edit', element: <PeriodEditPage /> },
+            { path: 'new', element: <PeriodCreatePage /> },
+          ],
+        },
+        {
+          path: 'speciality',
+          children: [
+            { element: <Navigate to="/dashboard/speciality/list" replace />, index: true },
+            { path: 'list', element: <SpecialityListPage /> },
+            { path: ':id', element: <SpecialityDetailsPage /> },
+            { path: ':id/edit', element: <SpecialityEditPage /> },
+            { path: 'new', element: <SpecialityCreatePage /> },
           ],
         },
         {

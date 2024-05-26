@@ -103,6 +103,18 @@ export const ShiftDetailsPage = Loadable(lazy(() => import('../pages/dashboard/S
 export const ShiftCreatePage = Loadable(lazy(() => import('../pages/dashboard/ShiftCreatePage')));
 export const ShiftEditPage = Loadable(lazy(() => import('../pages/dashboard/ShiftEditPage')));
 
+// DASHBOARD: PERIOD
+export const PeriodListPage = Loadable(lazy(() => import('../pages/dashboard/PeriodListPage')));
+export const PeriodDetailsPage = Loadable(lazy(() => import('../pages/dashboard/PeriodDetailsPage')));
+export const PeriodCreatePage = Loadable(lazy(() => import('../pages/dashboard/PeriodCreatePage')));
+export const PeriodEditPage = Loadable(lazy(() => import('../pages/dashboard/PeriodEditPage')));
+
+// DASHBOARD: SPECIALITY
+export const SpecialityListPage = Loadable(lazy(() => import('../pages/dashboard/SpecialityListPage')));
+export const SpecialityDetailsPage = Loadable(lazy(() => import('../pages/dashboard/SpecialityDetailsPage')));
+export const SpecialityCreatePage = Loadable(lazy(() => import('../pages/dashboard/SpecialityCreatePage')));
+export const SpecialityEditPage = Loadable(lazy(() => import('../pages/dashboard/SpecialityEditPage')));
+
 // DASHBOARD: BLOG
 export const BlogPostsPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostsPage')));
 export const BlogPostPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostPage')));

@@ -12,6 +12,8 @@ import schoolReducer from './slices/school';
 import becaReducer from './slices/beca';
 import modalityReducer from './slices/modality';
 import shiftReducer from './slices/shift';
+import periodReducer from './slices/period';
+import specialityReducer from './slices/speciality';
 
 // ----------------------------------------------------------------------
 
@@ -56,8 +58,23 @@ export const modalityPersistConfig = {
   keyPrefix: 'redux-',
   whitelist: ['sortBy', 'checkout'],
 };
+
 export const shiftPersistConfig = {
   key: 'shift',
+  storage,
+  keyPrefix: 'redux-',
+  whitelist: ['sortBy', 'checkout'],
+};
+
+export const periodPersistConfig = {
+  key: 'period',
+  storage,
+  keyPrefix: 'redux-',
+  whitelist: ['sortBy', 'checkout'],
+};
+
+export const specialityPersistConfig = {
+  key: 'speciality',
   storage,
   keyPrefix: 'redux-',
   whitelist: ['sortBy', 'checkout'],
@@ -74,6 +91,8 @@ const rootReducer = combineReducers({
   beca: persistReducer(becaPersistConfig, becaReducer),
   modality: persistReducer(modalityPersistConfig, modalityReducer),
   shift: persistReducer(shiftPersistConfig, shiftReducer),
+  period: persistReducer(periodPersistConfig, periodReducer),
+  speciality: persistReducer(specialityPersistConfig, specialityReducer),
 });
 
 export default rootReducer;
