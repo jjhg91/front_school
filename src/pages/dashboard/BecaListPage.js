@@ -261,7 +261,7 @@ export default function BecaListPage() {
           action={
             <Button
               component={RouterLink}
-              to={PATH_DASHBOARD.invoice.new}
+              to={PATH_DASHBOARD.beca.new}
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >

@@ -259,7 +259,7 @@ export default function SchoolListPage() {
           action={
             <Button
               component={RouterLink}
-              to={PATH_DASHBOARD.invoice.new}
+              to={PATH_DASHBOARD.school.new}
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
