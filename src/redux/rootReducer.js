@@ -14,6 +14,7 @@ import modalityReducer from './slices/modality';
 import shiftReducer from './slices/shift';
 import periodReducer from './slices/period';
 import specialityReducer from './slices/speciality';
+import courseReducer from './slices/course';
 
 // ----------------------------------------------------------------------
 
@@ -80,6 +81,13 @@ export const specialityPersistConfig = {
   whitelist: ['sortBy', 'checkout'],
 };
 
+export const coursePersistConfig = {
+  key: 'course',
+  storage,
+  keyPrefix: 'redux-',
+  whitelist: ['sortBy', 'checkout'],
+};
+
 const rootReducer = combineReducers({
   mail: mailReducer,
   chat: chatReducer,
@@ -93,6 +101,7 @@ const rootReducer = combineReducers({
   shift: persistReducer(shiftPersistConfig, shiftReducer),
   period: persistReducer(periodPersistConfig, periodReducer),
   speciality: persistReducer(specialityPersistConfig, specialityReducer),
+  course: persistReducer(coursePersistConfig, courseReducer),
 });
 
 export default rootReducer;

@@ -61,6 +61,11 @@ import {
   SpecialityDetailsPage,
   SpecialityCreatePage,
   SpecialityEditPage,
+  // Dashboard: Course
+  CourseListPage,
+  CourseDetailsPage,
+  CourseCreatePage,
+  CourseEditPage,
   // Dashboard: Ecommerce
   EcommerceShopPage,
   EcommerceCheckoutPage,
@@ -293,6 +298,16 @@ export default function Router() {
             { path: ':id', element: <SpecialityDetailsPage /> },
             { path: ':id/edit', element: <SpecialityEditPage /> },
             { path: 'new', element: <SpecialityCreatePage /> },
+          ],
+        },
+        {
+          path: 'course',
+          children: [
+            { element: <Navigate to="/dashboard/course/list" replace />, index: true },
+            { path: 'list', element: <CourseListPage /> },
+            { path: ':id', element: <CourseDetailsPage /> },
+            { path: ':id/edit', element: <CourseEditPage /> },
+            { path: 'new', element: <CourseCreatePage /> },
           ],
         },
         {

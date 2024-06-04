@@ -135,25 +135,25 @@ const navConfig = [
             // { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
           ],
         },
+        
+        // CURSO
+       {
+         title: 'cursos',
+         path: PATH_DASHBOARD.course.root,
+         icon: ICONS.folder,
+         children: [
+           { title: 'list', path: PATH_DASHBOARD.course.list },
+          //  { title: 'details', path: PATH_DASHBOARD.course.demoView },
+           { title: 'create', path: PATH_DASHBOARD.course.new },
+           // { title: 'edit', path: PATH_DASHBOARD.course.demoEdit },
+         ],
+       },
 
       // INVOICE
       {
         title: 'invoice',
         path: PATH_DASHBOARD.invoice.root,
         icon: ICONS.invoice,
-        children: [
-          { title: 'list', path: PATH_DASHBOARD.invoice.list },
-          { title: 'details', path: PATH_DASHBOARD.invoice.demoView },
-          { title: 'create', path: PATH_DASHBOARD.invoice.new },
-          // { title: 'edit', path: PATH_DASHBOARD.invoice.demoEdit },
-        ],
-      },
-
-       // CURSO
-      {
-        title: 'cursos',
-        path: PATH_DASHBOARD.invoice.root,
-        icon: ICONS.folder,
         children: [
           { title: 'list', path: PATH_DASHBOARD.invoice.list },
           { title: 'details', path: PATH_DASHBOARD.invoice.demoView },

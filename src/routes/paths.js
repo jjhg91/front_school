@@ -110,6 +110,13 @@ export const PATH_DASHBOARD = {
     view: (id) => path(ROOTS_DASHBOARD, `/speciality/${id}`),
     edit: (id) => path(ROOTS_DASHBOARD, `/speciality/${id}/edit`),
   },
+  course: {
+    root: path(ROOTS_DASHBOARD, '/course'),
+    list: path(ROOTS_DASHBOARD, '/course/list'),
+    new: path(ROOTS_DASHBOARD, '/course/new'),
+    view: (id) => path(ROOTS_DASHBOARD, `/course/${id}`),
+    edit: (id) => path(ROOTS_DASHBOARD, `/course/${id}/edit`),
+  },
   eCommerce: {
     root: path(ROOTS_DASHBOARD, '/e-commerce'),
     shop: path(ROOTS_DASHBOARD, '/e-commerce/shop'),

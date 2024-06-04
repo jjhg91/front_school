@@ -115,6 +115,12 @@ export const SpecialityDetailsPage = Loadable(lazy(() => import('../pages/dashbo
 export const SpecialityCreatePage = Loadable(lazy(() => import('../pages/dashboard/SpecialityCreatePage')));
 export const SpecialityEditPage = Loadable(lazy(() => import('../pages/dashboard/SpecialityEditPage')));
 
+// DASHBOARD: COURSE
+export const CourseListPage = Loadable(lazy(() => import('../pages/dashboard/CourseListPage')));
+export const CourseDetailsPage = Loadable(lazy(() => import('../pages/dashboard/CourseDetailsPage')));
+export const CourseCreatePage = Loadable(lazy(() => import('../pages/dashboard/CourseCreatePage')));
+export const CourseEditPage = Loadable(lazy(() => import('../pages/dashboard/CourseEditPage')));
+
 // DASHBOARD: BLOG
 export const BlogPostsPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostsPage')));
 export const BlogPostPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostPage')));
