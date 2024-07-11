@@ -37,7 +37,7 @@ export default function CourseCreatePage() {
               name: 'Course',
               href: PATH_DASHBOARD.course.list,
             },
-            { name: 'New Shool' },
+            { name: 'New Course' },
           ]}
         />
         <CourseNewEditForm isEdit={false} createCourse={createCourse} dispatch={dispatch}/>

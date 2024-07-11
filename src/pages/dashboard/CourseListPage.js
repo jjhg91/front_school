@@ -61,8 +61,9 @@ const SERVICE_OPTIONS = [
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
-  { id: 'dateStart', label: 'Date Start', align: 'left' },
-  { id: 'dateEnd', label: 'Date End', align: 'left' },
+  { id: 'hour_all', label: 'Type', align: 'left' },
+  { id: 'hour_all', label: 'H.A.', align: 'left' },
+  { id: 'credit_unit', label: 'U.C.', align: 'left' },
   { id: 'createdAt', label: 'Create', align: 'left' },
   { id: 'isActive', label: 'Status', align: 'left' },
   { id: '' },
@@ -269,6 +270,7 @@ export default function CourseListPage() {
             </Button>
           }
         />
+
 
         <Card sx={{ mb: 5 }}>
           <Scrollbar>

@@ -23,13 +23,13 @@ import FormProvider, {
   RHFSwitch,
   RHFTextField,
   RHFUploadAvatar,
+  RHFAutocomplete,
 } from '../../../../components/hook-form';
 // redux
 // import { useDispatch, useSelector } from '../../redux/store';
 // import { updateCourse } from '../../redux/slices/course';
 
-// import SimpleTransferList from '../../../sections/_examples/mui/transfer-list/SimpleTransferList';
-import EnhancedTransferList from './EnhancedTransferList';
+
 import speciality from 'src/redux/slices/speciality';
 // ----------------------------------------------------------------------
 
@@ -41,8 +41,22 @@ CourseNewEditForm.propTypes = {
   dispatch: PropTypes.func
 };
 
+
+const SPECIALITYS_OPTION = [
+  { label: 'Administracion de personal', id: 1 },
+  { label: 'Administracion de empresas', id: 2 },
+  { label: 'Informatica', id: 3 },
+  { label: 'Publicidad y mercadeo', id: 4 },
+];
+
+const REQUIREMENTS_OPTION = [
+  { label: 'Fisica 1', id: 1 },
+  { label: 'Fisica 2', id: 2 },
+  { label: 'Fisica 4', id: 3 },
+];
+
 export default function CourseNewEditForm({ isEdit = false, currentCourse, updateCourse, createCourse, dispatch }) {
-  const [listCourse, setListCourse] = useState([])
+  // const [listCourse, setListCourse] = useState([])
   // const dispatch = useDispatch();
 
   // const { course, isLoading } = useSelector((state) => state.course);
@@ -54,19 +68,25 @@ export default function CourseNewEditForm({ isEdit = false, currentCourse, updat
 
   const NewCourseSchema = Yup.object().shape({
     name: Yup.string().required('Name course is required'),
-    code_course: Yup.string().required('Code is required'),
+    prefix: Yup.string().required('Code is required'),
     description: Yup.string().required('Description is required'),
-    specialitys: Yup.array().of(
-      Yup.number().nullable(true),
-    ).nullable(true)
+    credit_unit: Yup.string().required('Unit Credit is required'),
+    hours_guided: Yup.string().required('Hours Guided is required'),
+    hours_self_study: Yup.string().required('Hours self study is required'),
+    specialitys: Yup.array().min(1, 'Must have at least 1 specialitys'),
+    requirements: Yup.array().min(1, 'Must have at least 1 requirement'),
   });
 
   const defaultValues = useMemo(
     () => ({
       name: currentCourse?.name || '',
-      code_course: currentCourse?.code_course || '',
+      prefix: currentCourse?.prefix || '',
       description: currentCourse?.description || '',
+      credit_unit: currentCourse?.credit_unit || '',
+      hours_guided: currentCourse?.hours_guided || '',
+      hours_self_study: currentCourse?.hours_self_study || '',
       specialitys: currentCourse?.specialitys || [],
+      requirements: currentCourse?.requirements || [],
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentCourse]
@@ -99,18 +119,17 @@ export default function CourseNewEditForm({ isEdit = false, currentCourse, updat
   }, [isEdit, currentCourse]);
 
   const onSubmit = async (data) => {
+    console.log('aqui');
     try {
-      // setValue('specialitys', listCourse,{ shouldValidate: true });
-      data.specialitys = listCourse;
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      if(isEdit){
-          dispatch(updateCourse(currentCourse.id_course,data))
-      }else{
-        dispatch(createCourse(data));
-      };
-      reset();
-      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      navigate(PATH_DASHBOARD.course.list);
+      // await new Promise((resolve) => setTimeout(resolve, 500));
+      // if(isEdit){
+      //     dispatch(updateCourse(currentCourse.id_course,data))
+      // }else{
+      //   dispatch(createCourse(data));
+      // };
+      // reset();
+      // enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
+      // navigate(PATH_DASHBOARD.course.list);
       console.log('DATA', data);
     } catch (error) {
       console.error(error);
@@ -134,91 +153,6 @@ export default function CourseNewEditForm({ isEdit = false, currentCourse, updat
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      {/* <Grid container spacing={3}> */}
-        {/* <Grid item xs={12} md={4}>
-          <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            {isEdit && (
-              <Label
-                color={values.status === 'active' ? 'success' : 'error'}
-                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-              >
-                {values.status}
-              </Label>
-            )}
-
-            <Box sx={{ mb: 5 }}>
-              <RHFUploadAvatar
-                name="photoUrl"
-                maxSize={3145728}
-                onDrop={handleDrop}
-                helperText={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 2,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.secondary',
-                    }}
-                  >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
-                  </Typography>
-                }
-              />
-            </Box>
-
-            {isEdit && (
-              <FormControlLabel
-                labelPlacement="start"
-                control={
-                  <Controller
-                    name="status"
-                    control={control}
-                    render={({ field }) => (
-                      <Switch
-                        {...field}
-                        checked={field.value !== 'active'}
-                        onChange={(event) =>
-                          field.onChange(event.target.checked ? 'banned' : 'active')
-                        }
-                      />
-                    )}
-                  />
-                }
-                label={
-                  <>
-                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Apply disable account
-                    </Typography>
-                  </>
-                }
-                sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-              />
-            )}
-
-            <RHFSwitch
-              name="isVerified"
-              labelPlacement="start"
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the course a verification email
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-            />
-          </Card>
-        </Grid> */}
-
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
@@ -230,14 +164,52 @@ export default function CourseNewEditForm({ isEdit = false, currentCourse, updat
                 sm: 'repeat(1, 1fr)',
               }}
             >
-              <RHFTextField name="name" label="Nombre" />
-              <RHFTextField name="code_course" label="Code" />
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={2}>
+                  <RHFTextField name="prefix" label="Prefix" />
+                </Grid>
+                <Grid item xs={12} sm={10}>
+                  <RHFTextField name="name" label="Nombre" />
+                </Grid>
+              </Grid>
               <RHFTextField name="description" label="Description" />
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={4}>
+                  <RHFTextField name="credit_unit" label="credit unit" />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <RHFTextField name="hours_guided" label="hours guided" />
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <RHFTextField name="hours_self_study" label="hours self study" />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                  <RHFAutocomplete
+                    name="specialitys"
+                    label="Specialitys"
+                    multiple
+                    // freeSolo
+                    options={SPECIALITYS_OPTION.map((option) => option)}
+                    isOptionEqualToValue={(options, value) => options.id === value.id}
+                    ChipProps={{ size: 'small' }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <RHFAutocomplete
+                    name="requirements"
+                    label="requirements"
+                    multiple
+                    // freeSolo
+                    options={REQUIREMENTS_OPTION.map((option) => option)}
+                    isOptionEqualToValue={(options, value) => options.id === value.id}
+                    ChipProps={{ size: 'small' }}
 
-              <EnhancedTransferList setListCourse={setListCourse}/>
-
+                  />
+                </Grid>
+              </Grid>
             </Box>
-
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'Create Course' : 'Save Changes'}
@@ -245,7 +217,6 @@ export default function CourseNewEditForm({ isEdit = false, currentCourse, updat
             </Stack>
           </Card>
         </Grid>
-      {/* </Grid> */}
     </FormProvider>
   );
 }

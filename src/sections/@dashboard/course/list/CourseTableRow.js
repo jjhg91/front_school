@@ -42,7 +42,7 @@ export default function SpecialityTableRow({
   onDeleteRow,
 }) {
   // const { sent, invoiceNumber, createDate, dueDate, status, invoiceTo, totalPrice } = row;
-  const { name, dateStart, dateEnd, isActive, createdAt } = row;
+  const { name, CourseType,credit_unit, hour_all, isActive, createdAt } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -72,8 +72,9 @@ export default function SpecialityTableRow({
         </TableCell>
 
         <TableCell align="left">{name}</TableCell>
-        <TableCell align="left">{fDate(dateStart)}</TableCell>
-        <TableCell align="left">{fDate(dateEnd)}</TableCell>
+        <TableCell align="left">{CourseType?.description}</TableCell>
+        <TableCell align="left">{credit_unit}</TableCell>
+        <TableCell align="left">{hour_all}</TableCell>
         <TableCell align="left">{fDate(createdAt)}</TableCell>
 
         <TableCell align="left">
