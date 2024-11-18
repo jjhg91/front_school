@@ -1,5 +1,5 @@
 import sum from 'lodash/sum';
-import { useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 // form
 import { useFormContext, useFieldArray } from 'react-hook-form';
 // @mui
@@ -9,7 +9,9 @@ import { fCurrency } from '../../../../utils/formatNumber';
 // components
 import Iconify from '../../../../components/iconify';
 import { RHFSelect, RHFTextField } from '../../../../components/hook-form';
-
+// redux
+import { useDispatch, useSelector } from '../../../../redux/store';
+import { getProductServices } from '../../../../redux/slices/productService';
 // ----------------------------------------------------------------------
 
 const SERVICE_OPTIONS = [
@@ -35,6 +37,10 @@ export default function InvoiceNewEditDetails() {
   const totalOnRow = values.items.map((item) => item.quantity * item.price);
 
   const totalPrice = sum(totalOnRow) - values.discount + values.taxes;
+
+  const dispatch = useDispatch();
+
+  const { productServices } = useSelector((state) => state.productService);
 
   useEffect(() => {
     setValue('totalPrice', totalPrice);
@@ -68,7 +74,8 @@ export default function InvoiceNewEditDetails() {
     (index, option) => {
       setValue(
         `items[${index}].price`,
-        SERVICE_OPTIONS.find((service) => service.name === option)?.price
+        // SERVICE_OPTIONS.find((service) => service.name === option)?.price
+        option.priceHistories.amount
       );
       setValue(
         `items[${index}].total`,
@@ -100,6 +107,10 @@ export default function InvoiceNewEditDetails() {
     [setValue, values.items]
   );
 
+  useEffect(() => {
+    dispatch(getProductServices());
+  }, [dispatch]);
+
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h6" sx={{ color: 'text.disabled', mb: 3 }}>
@@ -110,26 +121,12 @@ export default function InvoiceNewEditDetails() {
         {fields.map((item, index) => (
           <Stack key={item.id} alignItems="flex-end" spacing={1.5}>
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ width: 1 }}>
-              <RHFTextField
-                size="small"
-                name={`items[${index}].title`}
-                label="Title"
-                InputLabelProps={{ shrink: true }}
-              />
-
-              <RHFTextField
-                size="small"
-                name={`items[${index}].description`}
-                label="Description"
-                InputLabelProps={{ shrink: true }}
-              />
-
               <RHFSelect
                 name={`items[${index}].service`}
                 size="small"
-                label="Service"
+                label="Producto o Servicio"
                 InputLabelProps={{ shrink: true }}
-                sx={{ maxWidth: { md: 160 } }}
+                // sx={{ maxWidth: { md: 160 } }}
               >
                 <MenuItem
                   value=""
@@ -141,16 +138,45 @@ export default function InvoiceNewEditDetails() {
 
                 <Divider />
 
-                {SERVICE_OPTIONS.map((service) => (
+                {productServices.map((product) => (
                   <MenuItem
-                    key={service.id}
-                    value={service.name}
-                    onClick={() => handleSelectService(index, service.name)}
+                    key={product.id_productService}
+                    value={product.name}
+                    onClick={() => handleSelectService(index, product)}
                   >
-                    {service.name}
+                    <Typography variant="subtitle2" sx={{color: 'info.main'}} >
+                      {product.name} &nbsp;
+                    </Typography>
+                    
+                    <Typography
+                      variant="caption"
+                      component="div"
+                      sx={{
+                        my: -0.8,
+                        
+                      }}
+                    >
+                      {product.description}
+                    </Typography>
                   </MenuItem>
                 ))}
               </RHFSelect>
+
+              {/* <RHFTextField
+                size="small"
+                name={`items[${index}].title`}
+                label="Title"
+                InputLabelProps={{ shrink: true }}
+              /> */}
+
+              {/* <RHFTextField
+                size="small"
+                name={`items[${index}].description`}
+                label="Descripcion"
+                InputLabelProps={{ shrink: true }}
+              /> */}
+
+              
 
               <RHFTextField
                 size="small"
@@ -164,6 +190,7 @@ export default function InvoiceNewEditDetails() {
               />
 
               <RHFTextField
+                disabled
                 size="small"
                 type="number"
                 name={`items[${index}].price`}

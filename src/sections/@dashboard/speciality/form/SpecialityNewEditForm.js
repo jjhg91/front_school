@@ -3,12 +3,13 @@ import * as Yup from 'yup';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 // form
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel, TextField} from '@mui/material';
+import { Box, Card, Grid, Stack, Switch, Typography, FormControlLabel, TextField,  Button, Divider} from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
+import Iconify from '../../../../components/iconify';
 // utils
 import { fData } from '../../../../utils/formatNumber';
 // routes
@@ -23,6 +24,7 @@ import FormProvider, {
   RHFSwitch,
   RHFTextField,
   RHFUploadAvatar,
+  RHFSelect
 } from '../../../../components/hook-form';
 // redux
 // import { useDispatch, useSelector } from '../../redux/store';
@@ -33,12 +35,13 @@ import FormProvider, {
 SpecialityNewEditForm.propTypes = {
   isEdit: PropTypes.bool,
   currentSpeciality: PropTypes.object,
+  currentAcademicRegimens: PropTypes.object,
   updateSpeciality: PropTypes.func,
   createSpeciality: PropTypes.func,
   dispatch: PropTypes.func
 };
 
-export default function SpecialityNewEditForm({ isEdit = false, currentSpeciality, updateSpeciality, createSpeciality, dispatch }) {
+export default function SpecialityNewEditForm({ isEdit = false, currentSpeciality, currentAcademicRegimens, updateSpeciality, createSpeciality, dispatch }) {
 
   // const dispatch = useDispatch();
 
@@ -50,20 +53,31 @@ export default function SpecialityNewEditForm({ isEdit = false, currentSpecialit
   const { enqueueSnackbar } = useSnackbar();
 
   const NewSpecialitySchema = Yup.object().shape({
-    name: Yup.string().required('Name speciality is required'),
-    code_speciality: Yup.string().required('Code is required'),
-    description: Yup.string().required('Description is required'),
+    prefix: Yup.string().required('El prefijo para identificar la especialdiad es requqerido'),
+    name: Yup.string().required('El nombre de la especialdiad es requerida'),
+    code_speciality: Yup.string(),
+    description: Yup.string().required('La descripcion de la especialidad es requerida'),
+    specialityRegimen: Yup.array().of(
+      Yup.object().shape({
+        regiment: Yup.string().required('Seleccionar el regimen'),
+        periodsRegimeTotal: Yup.string().required('El numero de periodos totales es requerido'),
+      })
+    ).required('Se debe seleccionar al menos 1 regimen de estudio')
   });
 
   const defaultValues = useMemo(
     () => ({
+      prefix: currentSpeciality?.prefix || '',
       name: currentSpeciality?.name || '',
       code_speciality: currentSpeciality?.code_speciality || '',
       description: currentSpeciality?.description || '',
+      specialityRegimen: currentSpeciality?.SpecialityRegimen?.map( element => (
+        {regiment:element.regimenId, periodsRegimeTotal:element.periodsRegimeTotal}
+      )) || [{regiment: '', periodsRegimeTotal:''}]
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentSpeciality]
   );
+
 
   const methods = useForm({
     resolver: yupResolver(NewSpecialitySchema),
@@ -91,7 +105,14 @@ export default function SpecialityNewEditForm({ isEdit = false, currentSpecialit
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, currentSpeciality]);
 
+
   const onSubmit = async (data) => {
+    data.specialityRegimen = data.specialityRegimen.map( element => (
+      {
+        regiment: parseInt(element.regiment,10),
+        periodsRegimeTotal: parseInt(element.periodsRegimeTotal,10)
+      })
+    )
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       if(isEdit){
@@ -102,7 +123,7 @@ export default function SpecialityNewEditForm({ isEdit = false, currentSpecialit
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
       navigate(PATH_DASHBOARD.speciality.list);
-      console.log('DATA', data);
+      
     } catch (error) {
       console.error(error);
     }
@@ -123,93 +144,23 @@ export default function SpecialityNewEditForm({ isEdit = false, currentSpecialit
     [setValue]
   );
 
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'specialityRegimen',
+  });
+  const handleAdd = () => {
+    append({
+      regiment: '',
+      periodsRegimeTotal: 1,
+    });
+  };
+  const handleRemove = (index) => {
+    remove(index);
+  };
+
+
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      {/* <Grid container spacing={3}> */}
-        {/* <Grid item xs={12} md={4}>
-          <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            {isEdit && (
-              <Label
-                color={values.status === 'active' ? 'success' : 'error'}
-                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-              >
-                {values.status}
-              </Label>
-            )}
-
-            <Box sx={{ mb: 5 }}>
-              <RHFUploadAvatar
-                name="photoUrl"
-                maxSize={3145728}
-                onDrop={handleDrop}
-                helperText={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 2,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.secondary',
-                    }}
-                  >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
-                  </Typography>
-                }
-              />
-            </Box>
-
-            {isEdit && (
-              <FormControlLabel
-                labelPlacement="start"
-                control={
-                  <Controller
-                    name="status"
-                    control={control}
-                    render={({ field }) => (
-                      <Switch
-                        {...field}
-                        checked={field.value !== 'active'}
-                        onChange={(event) =>
-                          field.onChange(event.target.checked ? 'banned' : 'active')
-                        }
-                      />
-                    )}
-                  />
-                }
-                label={
-                  <>
-                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                      Banned
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                      Apply disable account
-                    </Typography>
-                  </>
-                }
-                sx={{ mx: 0, mb: 3, width: 1, justifyContent: 'space-between' }}
-              />
-            )}
-
-            <RHFSwitch
-              name="isVerified"
-              labelPlacement="start"
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the speciality a verification email
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-            />
-          </Card>
-        </Grid> */}
-
         <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
@@ -222,10 +173,79 @@ export default function SpecialityNewEditForm({ isEdit = false, currentSpecialit
               }}
             >
               <RHFTextField name="name" label="Nombre" />
-              <RHFTextField name="code_speciality" label="Code" />
-              <RHFTextField name="description" label="Description" />
+              <RHFTextField name="description" label="Descripcion" />
+            </Box>
+            <Box
+              sx={{ pt: 3 }}
+              rowGap={3}
+              columnGap={2}
+              display="grid"
+              gridTemplateColumns={{
+                xs: 'repeat(2, 1fr)',
+                sm: 'repeat(2, 1fr)',
+                }}
+            >
+                <RHFTextField name="prefix" label="Prefijo" />
+                <RHFTextField name="code_speciality" label="codigo" />
 
             </Box>
+            <Divider sx={{ my: 3, borderStyle: 'dashed' }} />
+
+            <Stack sx={{ mt: 3 }}>
+              {fields.map((item, index) => (
+                <Stack key={index} alignItems="flex-end" spacing={1.5}>
+                  <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} sx={{ width: 1 }}>
+
+                    <RHFSelect
+                      native
+                      name={`specialityRegimen[${index}].regiment`}
+                      label="Regimen de estudio"
+                      placeholder="Regimen de estudio"
+                      InputLabelProps={{ shrink: true }}
+                    >
+                      <option value="" />
+                      {currentAcademicRegimens?.map((academicRegimen,key) => (
+                        <option key={key} value={academicRegimen.id_academicRegimen}>
+                          {academicRegimen.description}
+                        </option>
+                      ))}
+                    </RHFSelect>
+
+                    <RHFTextField
+                      name={`specialityRegimen[${index}].periodsRegimeTotal`}
+                      label="Periodos totales"
+                      InputLabelProps={{ shrink: true }}
+                    />
+                  </Stack>
+                  <Button
+                    size="small"
+                    color="error"
+                    startIcon={<Iconify icon="eva:trash-2-outline" />}
+                    onClick={() => handleRemove(index)}
+                  >
+                    Remove
+                  </Button>
+                </Stack>
+              ))}
+            </Stack>
+
+
+
+            <Divider sx={{ my: 3, borderStyle: 'dashed' }} />
+              <Stack
+                spacing={2}
+                direction={{ xs: 'column-reverse', md: 'row' }}
+                alignItems={{ xs: 'flex-start', md: 'center' }}
+              >
+                <Button
+                  size="small"
+                  startIcon={<Iconify icon="eva:plus-fill" />}
+                  onClick={handleAdd}
+                  sx={{ flexShrink: 0 }}
+                >
+                  Agregar regimen de estudio
+                </Button>
+            </Stack>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>

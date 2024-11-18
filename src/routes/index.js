@@ -31,6 +31,24 @@ import {
   UserCreatePage,
   UserProfilePage,
   UserAccountPage,
+  // Dashboard: Student
+  StudentProfilePage,
+  StudentListPage,
+  StudentCreatePage,
+  StudentEditPage,
+  // Dashboard: Representative
+  RepresentativeListPage,
+  RepresentativeCreatePage,
+  RepresentativeEditPage,
+  // Dashboard: Teacher
+  TeacherProfilePage,
+  TeacherListPage,
+  TeacherCreatePage,
+  TeacherEditPage,
+  // Dashboard: Staff
+  StaffListPage,
+  StaffCreatePage,
+  StaffEditPage,
   // Dashboard: School
   SchoolListPage,
   SchoolDetailsPage,
@@ -55,6 +73,8 @@ import {
   PeriodListPage,
   PeriodDetailsPage,
   PeriodCreatePage,
+  PeriodCreateOfferingPage,
+  PeriodEditOfferingPage,
   PeriodEditPage,
   // Dashboard: Speciality
   SpecialityListPage,
@@ -66,6 +86,16 @@ import {
   CourseDetailsPage,
   CourseCreatePage,
   CourseEditPage,
+  // Dashboard: ProductSerive
+  ProductServiceListPage,
+  ProductServiceDetailsPage,
+  ProductServiceCreatePage,
+  ProductServiceEditPage,
+  // Dashboard: PreEnrollment
+  // PreEnrollmentListPage,
+  // PreEnrollmentDetailsPage,
+  PreEnrollmentCreatePage,
+  // PreEnrollmentEditPage,
   // Dashboard: Ecommerce
   EcommerceShopPage,
   EcommerceCheckoutPage,
@@ -241,6 +271,44 @@ export default function Router() {
           ],
         },
         {
+          path: 'student',
+          children:[
+            { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
+            { path: ':name/profile', element: <StudentProfilePage /> },
+            { path: 'list', element: <StudentListPage /> },
+            { path: 'new', element: <StudentCreatePage /> },
+            { path: ':name/edit', element: <StudentEditPage /> },
+          ],
+        },
+        {
+          path: 'representative',
+          children:[
+            { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
+            { path: 'list', element: <RepresentativeListPage /> },
+            { path: 'new', element: <RepresentativeCreatePage /> },
+            { path: ':name/edit', element: <RepresentativeEditPage /> },
+          ],
+        },
+        {
+          path: 'teacher',
+          children:[
+            { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
+            { path: ':name/profile', element: <TeacherProfilePage /> },
+            { path: 'list', element: <TeacherListPage /> },
+            { path: 'new', element: <TeacherCreatePage /> },
+            { path: ':name/edit', element: <TeacherEditPage /> },
+          ],
+        },
+        {
+          path: 'staff',
+          children:[
+            { element: <Navigate to="/dashboard/user/profile" replace />, index: true },
+            { path: 'list', element: <StaffListPage /> },
+            { path: 'new', element: <StaffCreatePage /> },
+            { path: ':name/edit', element: <StaffEditPage /> },
+          ],
+        },
+        {
           path: 'school',
           children: [
             { element: <Navigate to="/dashboard/school/list" replace />, index: true },
@@ -286,7 +354,9 @@ export default function Router() {
             { element: <Navigate to="/dashboard/period/list" replace />, index: true },
             { path: 'list', element: <PeriodListPage /> },
             { path: ':id', element: <PeriodDetailsPage /> },
+            { path: ':id/edit/offering', element: <PeriodEditOfferingPage /> },
             { path: ':id/edit', element: <PeriodEditPage /> },
+            { path: 'new/offering', element: <PeriodCreateOfferingPage /> },
             { path: 'new', element: <PeriodCreatePage /> },
           ],
         },
@@ -308,6 +378,26 @@ export default function Router() {
             { path: ':id', element: <CourseDetailsPage /> },
             { path: ':id/edit', element: <CourseEditPage /> },
             { path: 'new', element: <CourseCreatePage /> },
+          ],
+        },
+        {
+          path: 'productService',
+          children: [
+            { element: <Navigate to="/dashboard/productService/list" replace />, index: true },
+            { path: 'list', element: <ProductServiceListPage /> },
+            { path: ':id', element: <ProductServiceDetailsPage /> },
+            { path: ':id/edit', element: <ProductServiceEditPage /> },
+            { path: 'new', element: <ProductServiceCreatePage /> },
+          ],
+        },
+        {
+          path: 'preEnrollment',
+          children: [
+            { element: <Navigate to="/dashboard/preEnrollment/list" replace />, index: true },
+            // { path: 'list', element: <PreEnrollmentListPage /> },
+            // { path: ':id', element: <PreEnrollmentDetailsPage /> },
+            // { path: ':id/edit', element: <PreEnrollmentEditPage /> },
+            { path: ':id/new', element: <PreEnrollmentCreatePage /> },
           ],
         },
         {

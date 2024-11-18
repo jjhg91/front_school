@@ -41,7 +41,7 @@ export default function CourseDetailsPage() {
       value: 'general',
       label: 'General',
       icon: <Iconify icon="ic:round-account-box" />,
-      component: <AccountGeneral course={course}/>,
+      component: <AccountGeneral course={course} />,
     },
     {
       value: 'billing',
@@ -77,7 +77,7 @@ export default function CourseDetailsPage() {
 
   useEffect(() => {
     dispatch(getCourse(id));
-  }, [dispatch,id]);
+  }, [dispatch, id]);
 
   return (
     <>

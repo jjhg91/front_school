@@ -40,7 +40,7 @@ export default function BecaCreatePage() {
             { name: 'New Shool' },
           ]}
         />
-        <BecaNewEditForm isEdit={false} createBeca={createBeca} dispatch={dispatch}/>
+        <BecaNewEditForm isEdit={false} createBeca={createBeca} dispatch={dispatch} />
       </Container>
     </>
   );

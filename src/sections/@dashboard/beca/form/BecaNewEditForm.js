@@ -51,26 +51,26 @@ export default function BecaNewEditForm({ isEdit = false, currentBeca, updateBec
     name_beca: Yup.string().required('Name beca is required'),
     rif: Yup.string().required('Rif or C.I is required'),
     description: Yup.string().required('Name beca is required'),
+    given_by: Yup.string().required('Nombre de contacto de beca required'),
     inscription: Yup.string().required('Porcentaje incripcion de beca required'),
     monthly_payment: Yup.string().required('porcentaje de mensualidad beca is required'),
-    given_by: Yup.string().required('Nombre de contacto de beca required'),
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
     phoneNumber_1: Yup.string().required('Phone Number 1 is required'),
     phoneNumber_2: Yup.string().nullable(true),
-    logoUrl: Yup.string().nullable(true),
     });
+
 
   const defaultValues = useMemo(
     () => ({
       name_beca: currentBeca?.name_beca || '',
       rif: currentBeca?.rif || '',
       description: currentBeca?.description || '',
+      given_by: currentBeca?.given_by || '',
       inscription: currentBeca?.inscription || '',
       monthly_payment: currentBeca?.monthly_payment || '',
-      given_by: currentBeca?.given_by || '',
       email: currentBeca?.email || '',
       phoneNumber_1: currentBeca?.phoneNumber_1 || '',
-      phoneNumber_2: currentBeca?.phoneNumber_2 || '', 
+      phoneNumber_2: currentBeca?.phoneNumber_2 || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentBeca]
@@ -103,6 +103,8 @@ export default function BecaNewEditForm({ isEdit = false, currentBeca, updateBec
   }, [isEdit, currentBeca]);
 
   const onSubmit = async (data) => {
+    data.inscription = parseInt(data.inscription,10);
+    data.monthly_payment = parseInt(data.monthly_payment,10);
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       if(isEdit){
@@ -233,24 +235,14 @@ export default function BecaNewEditForm({ isEdit = false, currentBeca, updateBec
               }}
             >
               <RHFTextField name="name_beca" label="Nombre" />
-              <RHFTextField name="description" label="Descripcion" />
               <RHFTextField name="rif" label="Rif" />
+              <RHFTextField name="description" label="Descripcion" sx={{gridColumn: 'span 2'}} />
               <RHFTextField name="inscription" label="Porcentaje inscripcion" />
               <RHFTextField name="monthly_payment" label="Porcentaje mensualidad" />
               <RHFTextField name="given_by" label="Nombre de contacto" />
-              <RHFTextField name="email" label="Email" />
-              <RHFTextField name="phoneNumber_1" label="Phone Number 1" />
-              <RHFTextField name="phoneNumber_2" label="Phone Number 2" />
-{/* 
-              <RHFSelect native name="country" label="Country" placeholder="Country">
-                <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
-                  </option>
-                ))}
-              </RHFSelect> */}
-
+              <RHFTextField name="email" label="Correo electronico de contacto" />
+              <RHFTextField name="phoneNumber_1" label="Numero celular de contacto" />
+              <RHFTextField name="phoneNumber_2" label="Numero celular de contacto (alternativo)" />
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>

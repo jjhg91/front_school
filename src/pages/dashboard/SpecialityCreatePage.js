@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useState, useEffect } from 'react';
 // @mui
 import { Container } from '@mui/material';
 // routes
@@ -9,15 +10,25 @@ import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import SpecialityNewEditForm from '../../sections/@dashboard/speciality/form/SpecialityNewEditForm';
 // redux
-import { useDispatch } from '../../redux/store';
+import { useDispatch, useSelector } from '../../redux/store';
 import { createSpeciality } from '../../redux/slices/speciality';
+import { getAcademicRegimens } from '../../redux/slices/academicRegimen';
 
 // ----------------------------------------------------------------------
 
 export default function SpecialityCreatePage() {
   const dispatch = useDispatch();
+  const { academicRegimens } = useSelector((state) => state.academicRegimen);
+  const [ currentAcademicRegimens, setCurrentAcademicRegimens] = useState(academicRegimens);
 
   const { themeStretch } = useSettingsContext();
+
+  useEffect(() => {
+    dispatch(getAcademicRegimens());
+  }, [dispatch]);
+  useEffect(() => {
+    setCurrentAcademicRegimens(academicRegimens);
+  }, [academicRegimens]);
 
   return (
     <>
@@ -40,7 +51,7 @@ export default function SpecialityCreatePage() {
             { name: 'New Shool' },
           ]}
         />
-        <SpecialityNewEditForm isEdit={false} createSpeciality={createSpeciality} dispatch={dispatch}/>
+        <SpecialityNewEditForm isEdit={false} createSpeciality={createSpeciality} currentAcademicRegimens={currentAcademicRegimens} dispatch={dispatch}/>
       </Container>
     </>
   );

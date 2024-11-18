@@ -50,7 +50,7 @@ export default function BookingRoomAvailable({ title, subheader, chart, ...other
           name: { offsetY: -16 },
           value: { offsetY: 8 },
           total: {
-            label: 'Rooms',
+            label: 'Facturas',
             formatter: () => fNumber(total),
           },
         },
@@ -104,7 +104,7 @@ function Legend({ item }) {
         </Typography>
       </Stack>
 
-      <Typography variant="subtitle1"> {item.value} Rooms</Typography>
+      <Typography variant="subtitle1"> {item.value} Facturas</Typography>
     </Stack>
   );
 }

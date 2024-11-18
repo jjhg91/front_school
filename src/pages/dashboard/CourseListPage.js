@@ -60,11 +60,11 @@ const SERVICE_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', align: 'left' },
-  { id: 'hour_all', label: 'Type', align: 'left' },
-  { id: 'hour_all', label: 'H.A.', align: 'left' },
-  { id: 'credit_unit', label: 'U.C.', align: 'left' },
-  { id: 'createdAt', label: 'Create', align: 'left' },
+  { id: 'prefix', label: 'Prefijo', align: 'left' },
+  { id: 'name', label: 'Nombre', align: 'left' },
+  { id: 'courseType', label: 'tipo', align: 'left' },
+  { id: 'credit_unit', label: 'U.C', align: 'left' },
+  { id: 'hour_all', label: 'Horas', align: 'left' },
   { id: 'isActive', label: 'Status', align: 'left' },
   { id: '' },
 ];
@@ -266,7 +266,7 @@ export default function CourseListPage() {
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Invoice
+              Nuevo curso
             </Button>
           }
         />

@@ -1,21 +1,46 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 // @mui
-import { Card, Stack, Paper, Button, Typography, IconButton } from '@mui/material';
+import {
+  Card,
+  Stack,
+  Paper,
+  Button,
+  Typography,
+  IconButton,
+  MenuItem,
+  Divider,
+  Box,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  List,
+  ListItem,
+  ListItemText
+ } from '@mui/material';
 // components
 import Image from '../../../../../components/image';
 import Iconify from '../../../../../components/iconify';
+import MenuPopover from '../../../../../components/menu-popover';
 // section
 import { PaymentNewCardDialog } from '../../../../payment';
+
+
+// import Accordion from '@mui/material/Accordion';
+// import AccordionDetails from '@mui/material/AccordionDetails';
+// import AccordionSummary from '@mui/material/AccordionSummary';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 // ----------------------------------------------------------------------
 
 AccountBillingPaymentMethod.propTypes = {
-  cards: PropTypes.array,
+  currentOffering: PropTypes.object,
+  onEditRow: PropTypes.func
 };
 
-export default function AccountBillingPaymentMethod({ cards }) {
+export default function AccountBillingPaymentMethod({ currentOffering,onEditRow }) {
   const [open, setOpen] = useState(false);
+  const [openPopover, setOpenPopover] = useState(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -24,6 +49,23 @@ export default function AccountBillingPaymentMethod({ cards }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleOpenPopover = (event) => {
+    setOpenPopover(event.currentTarget);
+  };
+
+  const handleClosePopover = () => {
+    setOpenPopover(null);
+  };
+
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+console.log(currentOffering)
 
   return (
     <>
@@ -36,58 +78,76 @@ export default function AccountBillingPaymentMethod({ cards }) {
               color: 'text.secondary',
             }}
           >
-            Payment Method
+            {currentOffering.SpecialityRegimen.Speciality.name} -
+            {currentOffering.SpecialityRegimen.AcademicRegimen.description}
           </Typography>
 
-          <Button size="small" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpen}>
-            New card
-          </Button>
-        </Stack>
+          <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
+            <Iconify icon="eva:more-vertical-fill" />
+          </IconButton>
 
-        <Stack
-          spacing={2}
-          direction={{
-            xs: 'column',
-            md: 'row',
-          }}
-        >
-          {cards.map((card) => (
-            <Paper
-              key={card.id}
-              variant="outlined"
-              sx={{
-                p: 3,
-                width: 1,
-                position: 'relative',
+          <MenuPopover
+            open={openPopover}
+            onClose={handleClosePopover}
+            arrow="right-top"
+            sx={{ width: 160 }}
+          >
+            <MenuItem
+              onClick={() => {
+                onEditRow();
+                handleClosePopover();
               }}
             >
-              <Image
-                alt="icon"
-                src={
-                  card.cardType === 'master_card'
-                    ? '/assets/icons/payments/ic_mastercard.svg'
-                    : '/assets/icons/payments/ic_visa.svg'
-                }
-                sx={{ mb: 1, maxWidth: 36 }}
-              />
+              <Iconify icon="eva:edit-fill" />
+              Edit
+            </MenuItem>
+            <Divider sx={{ borderStyle: 'dashed' }} />
+            <MenuItem
+              // onClick={() => {
+                // handleOpenConfirm();
+                // handleClosePopover();
+              // }}
+              sx={{ color: 'error.main' }}
+            >
+              <Iconify icon="eva:trash-2-outline" />
+              Delete
+            </MenuItem>
+          </MenuPopover>
+        </Stack>
 
-              <Typography variant="subtitle2">{card.cardNumber}</Typography>
+        <Stack direction="column" sx={{ mb: 3 }}>
+          <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+            <AccordionSummary
+              // expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                {currentOffering.SpecialityRegimen.Speciality.name}
+              </Typography>
+              {/* <Typography sx={{ color: 'text.secondary' }}><small><i>Secciones: </i>A, B, C</small></Typography> */}
+            </AccordionSummary>
+            <AccordionDetails>
+             {/* ------------------ */}
+              <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {currentOffering.CourseOffering.map(element => (
+                  <ListItem>
+                    <ListItemText
+                      primary=  { element.CourseSpecialityRegimen.Course.name }
+                      secondary={ element.CourseSection.map(section =>(`${section.sectionName} `)) }
+                    />
+                  </ListItem>
+                ))}
+              </List>
+             {/* ------------------ */}
+            </AccordionDetails>
+          </Accordion>
 
-              <IconButton
-                sx={{
-                  top: 8,
-                  right: 8,
-                  position: 'absolute',
-                }}
-              >
-                <Iconify icon="eva:more-vertical-fill" />
-              </IconButton>
-            </Paper>
-          ))}
         </Stack>
       </Card>
 
-      <PaymentNewCardDialog open={open} onClose={handleClose} />
+
+      {/* <PaymentNewCardDialog open={open} onClose={handleClose} /> */}
     </>
   );
 }

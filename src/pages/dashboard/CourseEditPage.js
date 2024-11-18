@@ -15,6 +15,7 @@ import CourseNewEditForm from '../../sections/@dashboard/course/form/CourseNewEd
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getCourse, updateCourse } from '../../redux/slices/course';
+import { getSpecialityRegimens } from '../../redux/slices/specialityRegimen';
 // ----------------------------------------------------------------------
 
 export default function CourseEditPage() {
@@ -22,8 +23,10 @@ export default function CourseEditPage() {
   const dispatch = useDispatch();
 
   const { course } = useSelector((state) => state.course);
+  const { specialityRegimens } = useSelector((state) => state.specialityRegimen);
 
   const [currentCourse, setCurrentCourse] = useState(course);
+  const [currentSpecialityRegimens, setCurrentSpecialityRegimens] = useState(specialityRegimens);
 
   const { themeStretch } = useSettingsContext();
 
@@ -33,11 +36,17 @@ export default function CourseEditPage() {
 
   useEffect(() => {
     dispatch(getCourse(id));
+    dispatch(getSpecialityRegimens());
   }, [dispatch,id]);
 
   useEffect(() => {
     setCurrentCourse(course);
   }, [course]);
+
+  useEffect(() => {
+    setCurrentSpecialityRegimens(specialityRegimens);
+  }, [specialityRegimens]);
+
 
   return (
     <>
@@ -61,7 +70,7 @@ export default function CourseEditPage() {
           ]}
         />
 
-        <CourseNewEditForm isEdit currentCourse={currentCourse}  updateCourse={updateCourse} dispatch={dispatch} />
+        <CourseNewEditForm isEdit currentCourse={currentCourse} currentSpecialityRegimens={currentSpecialityRegimens} updateCourse={updateCourse} dispatch={dispatch} />
      
       </Container>
     </>

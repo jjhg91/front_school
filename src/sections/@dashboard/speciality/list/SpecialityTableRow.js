@@ -42,7 +42,7 @@ export default function SpecialityTableRow({
   onDeleteRow,
 }) {
   // const { sent, invoiceNumber, createDate, dueDate, status, invoiceTo, totalPrice } = row;
-  const { name, dateStart, dateEnd, isActive, createdAt } = row;
+  const { prefix,name, description, isActive } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -71,10 +71,9 @@ export default function SpecialityTableRow({
           <Checkbox checked={selected} onClick={onSelectRow} />
         </TableCell>
 
+        <TableCell align="left">{prefix}</TableCell>
         <TableCell align="left">{name}</TableCell>
-        <TableCell align="left">{fDate(dateStart)}</TableCell>
-        <TableCell align="left">{fDate(dateEnd)}</TableCell>
-        <TableCell align="left">{fDate(createdAt)}</TableCell>
+        <TableCell align="left">{description}</TableCell>
 
         <TableCell align="left">
                <Label

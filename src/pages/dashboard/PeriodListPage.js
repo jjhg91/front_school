@@ -31,6 +31,7 @@ import Scrollbar from '../../components/scrollbar';
 import ConfirmDialog from '../../components/confirm-dialog';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import { useSettingsContext } from '../../components/settings';
+
 import {
   useTable,
   getComparator,
@@ -61,9 +62,9 @@ const SERVICE_OPTIONS = [
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', align: 'left' },
+  { id: 'description', label: 'Descripcion', align: 'left' },
   { id: 'dateStart', label: 'Date Start', align: 'left' },
   { id: 'dateEnd', label: 'Date End', align: 'left' },
-  { id: 'createdAt', label: 'Create', align: 'left' },
   { id: 'isActive', label: 'Status', align: 'left' },
   { id: '' },
 ];
@@ -239,7 +240,7 @@ export default function PeriodListPage() {
   return (
     <>
       <Helmet>
-        <title> Period: List | Minimal UI</title>
+        <title> Periodo: Lista | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -265,7 +266,7 @@ export default function PeriodListPage() {
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Invoice
+              Nuevo Periodo
             </Button>
           }
         />

@@ -31,9 +31,7 @@ UserTableRow.propTypes = {
 
 export default function UserTableRow({ row, selected, onProfileRow, onEditRow, onSelectRow, onDeleteRow }) {
   const { first_name, first_surname, photoUrl, company, role, isActive, status } = row;
-console.log('aqui',row)
   const [openConfirm, setOpenConfirm] = useState(false);
-
   const [openPopover, setOpenPopover] = useState(null);
 
   const handleOpenConfirm = () => {

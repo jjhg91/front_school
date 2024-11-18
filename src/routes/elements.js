@@ -79,6 +79,27 @@ export const UserAccountPage = Loadable(lazy(() => import('../pages/dashboard/Us
 export const UserCreatePage = Loadable(lazy(() => import('../pages/dashboard/UserCreatePage')));
 export const UserEditPage = Loadable(lazy(() => import('../pages/dashboard/UserEditPage')));
 
+// DASHBOARD: STUDENT
+export const StudentProfilePage = Loadable(lazy(() => import('../pages/dashboard/StudentProfilePage')));
+export const StudentListPage = Loadable(lazy(() => import('../pages/dashboard/StudentListPage')));
+export const StudentCreatePage = Loadable(lazy(() => import('../pages/dashboard/StudentCreatePage')));
+export const StudentEditPage = Loadable(lazy(() => import('../pages/dashboard/StudentEditPage')));
+
+// DASHBOARD: REPRESENTATIVE
+export const RepresentativeListPage = Loadable(lazy(() => import('../pages/dashboard/RepresentativeListPage')));
+export const RepresentativeCreatePage = Loadable(lazy(() => import('../pages/dashboard/RepresentativeCreatePage')));
+export const RepresentativeEditPage = Loadable(lazy(() => import('../pages/dashboard/RepresentativeEditPage')));
+// DASHBOARD: TEACHER
+export const TeacherProfilePage = Loadable(lazy(() => import('../pages/dashboard/TeacherProfilePage')));
+export const TeacherListPage = Loadable(lazy(() => import('../pages/dashboard/TeacherListPage')));
+export const TeacherCreatePage = Loadable(lazy(() => import('../pages/dashboard/TeacherCreatePage')));
+export const TeacherEditPage = Loadable(lazy(() => import('../pages/dashboard/TeacherEditPage')));
+
+// DASHBOARD: STAFF
+export const StaffListPage = Loadable(lazy(() => import('../pages/dashboard/StaffListPage')));
+export const StaffCreatePage = Loadable(lazy(() => import('../pages/dashboard/StaffCreatePage')));
+export const StaffEditPage = Loadable(lazy(() => import('../pages/dashboard/StaffEditPage')));
+
 // DASHBOARD: SCHOOL
 export const SchoolListPage = Loadable(lazy(() => import('../pages/dashboard/SchoolListPage')));
 export const SchoolDetailsPage = Loadable(lazy(() => import('../pages/dashboard/SchoolDetailsPage')));
@@ -107,6 +128,8 @@ export const ShiftEditPage = Loadable(lazy(() => import('../pages/dashboard/Shif
 export const PeriodListPage = Loadable(lazy(() => import('../pages/dashboard/PeriodListPage')));
 export const PeriodDetailsPage = Loadable(lazy(() => import('../pages/dashboard/PeriodDetailsPage')));
 export const PeriodCreatePage = Loadable(lazy(() => import('../pages/dashboard/PeriodCreatePage')));
+export const PeriodCreateOfferingPage = Loadable(lazy(() => import('../pages/dashboard/PeriodCreateOfferingPage')));
+export const PeriodEditOfferingPage = Loadable(lazy(() => import('../pages/dashboard/PeriodEditOfferingPage')));
 export const PeriodEditPage = Loadable(lazy(() => import('../pages/dashboard/PeriodEditPage')));
 
 // DASHBOARD: SPECIALITY
@@ -120,6 +143,19 @@ export const CourseListPage = Loadable(lazy(() => import('../pages/dashboard/Cou
 export const CourseDetailsPage = Loadable(lazy(() => import('../pages/dashboard/CourseDetailsPage')));
 export const CourseCreatePage = Loadable(lazy(() => import('../pages/dashboard/CourseCreatePage')));
 export const CourseEditPage = Loadable(lazy(() => import('../pages/dashboard/CourseEditPage')));
+
+// DASHBOARD: PRODUCT SERVICE
+export const ProductServiceListPage = Loadable(lazy(() => import('../pages/dashboard/ProductServiceListPage')));
+export const ProductServiceDetailsPage = Loadable(lazy(() => import('../pages/dashboard/ProductServiceDetailsPage')));
+export const ProductServiceCreatePage = Loadable(lazy(() => import('../pages/dashboard/ProductServiceCreatePage')));
+export const ProductServiceEditPage = Loadable(lazy(() => import('../pages/dashboard/ProductServiceEditPage')));
+
+// DASHBOARD: PRE ENROLLMENT
+export const PreEnrollmentListPage = Loadable(lazy(() => import('../pages/dashboard/PreEnrollmentListPage')));
+export const PreEnrollmentDetailsPage = Loadable(lazy(() => import('../pages/dashboard/PreEnrollmentDetailsPage')));
+export const PreEnrollmentCreatePage = Loadable(lazy(() => import('../pages/dashboard/PreEnrollmentCreatePage')));
+export const PreEnrollmentEditPage = Loadable(lazy(() => import('../pages/dashboard/PreEnrollmentEditPage')));
+
 
 // DASHBOARD: BLOG
 export const BlogPostsPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostsPage')));

@@ -42,7 +42,7 @@ export default function InvoiceTableRow({
   onEditRow,
   onDeleteRow,
 }) {
-  const { sent, invoiceNumber, createDate, dueDate, status, invoiceTo, totalPrice } = row;
+  const { id_invoice, student, createAt, dueDate, totalAmount, isPaid } = row;
 
   const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -73,11 +73,11 @@ export default function InvoiceTableRow({
 
         <TableCell>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <CustomAvatar name={invoiceTo.name} />
+            <CustomAvatar name={student.User.first_surname} />
 
             <div>
               <Typography variant="subtitle2" noWrap>
-                {invoiceTo.name}
+                {`${student.User.first_surname}, ${student.User.first_name}`}
               </Typography>
 
               <Link
@@ -86,33 +86,33 @@ export default function InvoiceTableRow({
                 onClick={onViewRow}
                 sx={{ color: 'text.disabled', cursor: 'pointer' }}
               >
-                {`INV-${invoiceNumber}`}
+                {`INV-${id_invoice}`}
               </Link>
             </div>
           </Stack>
         </TableCell>
 
-        <TableCell align="left">{fDate(createDate)}</TableCell>
+        <TableCell align="left">{fDate(createAt)}</TableCell>
 
         <TableCell align="left">{fDate(dueDate)}</TableCell>
 
-        <TableCell align="center">{fCurrency(totalPrice)}</TableCell>
-
-        <TableCell align="center" sx={{ textTransform: 'capitalize' }}>
+        {/* <TableCell align="center" sx={{ textTransform: 'capitalize' }}>
           {sent}
-        </TableCell>
+        </TableCell> */}
+
+        <TableCell align="center">{fCurrency(totalAmount)}</TableCell>
 
         <TableCell align="left">
           <Label
             variant="soft"
             color={
-              (status === 'paid' && 'success') ||
-              (status === 'unpaid' && 'warning') ||
-              (status === 'overdue' && 'error') ||
+              (isPaid === true && 'success') ||
+              (isPaid === false && 'error') ||
+              (isPaid === null && 'warning') ||
               'default'
             }
           >
-            {status}
+            {isPaid === true ? 'Pagado' : 'Sin pago'}
           </Label>
         </TableCell>
 

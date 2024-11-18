@@ -56,22 +56,22 @@ export default function InvoiceAddressListDialog({
         justifyContent="space-between"
         sx={{ pt: 2.5, px: 3 }}
       >
-        <Typography variant="h6"> Select address </Typography>
+        <Typography variant="h6"> Seleccionar Estudiante </Typography>
 
-        <Button
+        {/* <Button
           size="small"
           startIcon={<Iconify icon="eva:plus-fill" />}
           sx={{ alignSelf: 'flex-end' }}
         >
           Add New
-        </Button>
+        </Button> */}
       </Stack>
 
       <Stack sx={{ p: 2.5 }}>
         <TextField
           value={searchAddress}
           onChange={handleSearchAddress}
-          placeholder="Search..."
+          placeholder="Buscar..."
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -89,7 +89,7 @@ export default function InvoiceAddressListDialog({
           {dataFiltered.map((address) => (
             <ListItemButton
               key={address.id}
-              selected={selected(address.id)}
+              selected={selected(address.id_student)}
               onClick={() => handleSelectAddress(address)}
               sx={{
                 p: 1.5,
@@ -104,22 +104,26 @@ export default function InvoiceAddressListDialog({
                 },
               }}
             >
-              <Typography variant="subtitle2">{address.name}</Typography>
+              <Typography variant="subtitle2" sx={{color: 'info.main'}} >
+                {address.User.first_surname} {address.User?.second_surname}, {address.User.first_name} {address.User?.second_name}
+              </Typography>
 
               <Typography
                 variant="caption"
                 component="div"
                 sx={{
                   my: 0.5,
-                  color: 'info.main',
-                  fontWeight: 'fontWeightMedium',
+                  
                 }}
               >
-                {address.company}
+                C.I: {address.User.cedula} |
+                Celular: {address.User.phoneNumber_1} |
+                Email: {address.User.email}
               </Typography>
 
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {address.address}
+                {address.User.address} |
+            
               </Typography>
             </ListItemButton>
           ))}

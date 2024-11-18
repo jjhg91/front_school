@@ -99,7 +99,6 @@ export default function UserListPage() {
 
   const { users, isLoading } = useSelector((state) => state.user);
 
-  console.log(users);
   console.log(isLoading);
 
   // const [tableData, setTableData] = useState(_userList);
@@ -228,7 +227,7 @@ export default function UserListPage() {
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New User
+              Nuevo Usuario
             </Button>
           }
         />

@@ -23,6 +23,7 @@ import {
 import { useDispatch, useSelector } from '../../redux/store';
 import { getPeriod } from '../../redux/slices/period';
 
+
 // ----------------------------------------------------------------------
 
 export default function PeriodDetailsPage() {
@@ -44,8 +45,8 @@ export default function PeriodDetailsPage() {
       component: <AccountGeneral period={period}/>,
     },
     {
-      value: 'billing',
-      label: 'Billing',
+      value: 'ofertas_academicas',
+      label: 'Ofertas Academicas',
       icon: <Iconify icon="ic:round-receipt" />,
       component: (
         <AccountBilling
@@ -82,12 +83,12 @@ export default function PeriodDetailsPage() {
   return (
     <>
       <Helmet>
-        <title> Period: View | Minimal UI</title>
+        <title> Periodo: Detalle | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Period Details"
+          heading="Periodo Detalle"
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.root },
             { name: 'periods', href: PATH_DASHBOARD.period.root },

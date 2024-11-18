@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import sumBy from 'lodash/sumBy';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
@@ -23,7 +23,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 // utils
 import { fTimestamp } from '../../utils/formatTime';
 // _mock_
-import { _invoices } from '../../_mock/arrays';
+// import { _invoices } from '../../_mock/arrays';
 // components
 import Label from '../../components/label';
 import Iconify from '../../components/iconify';
@@ -44,7 +44,9 @@ import {
 // sections
 import InvoiceAnalytic from '../../sections/@dashboard/invoice/InvoiceAnalytic';
 import { InvoiceTableRow, InvoiceTableToolbar } from '../../sections/@dashboard/invoice/list';
-
+// redux
+import { useDispatch, useSelector } from '../../redux/store';
+import { getInvoices } from '../../redux/slices/invoice';
 // ----------------------------------------------------------------------
 
 const SERVICE_OPTIONS = [
@@ -57,12 +59,12 @@ const SERVICE_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-  { id: 'invoiceNumber', label: 'Client', align: 'left' },
-  { id: 'createDate', label: 'Create', align: 'left' },
-  { id: 'dueDate', label: 'Due', align: 'left' },
-  { id: 'price', label: 'Amount', align: 'center', width: 140 },
-  { id: 'sent', label: 'Sent', align: 'center', width: 140 },
-  { id: 'status', label: 'Status', align: 'left' },
+  { id: 'id_invoice', label: 'Factura', align: 'left' },
+  { id: 'issuedDate', label: 'Fecha', align: 'left' },
+  { id: 'dueDate', label: 'Vencimiento', align: 'left' },
+  // { id: 'sent', label: 'Articulos', align: 'center', width: 140 },
+  { id: 'totalAmount', label: 'Monto', align: 'center', width: 140 },
+  { id: 'isPaid', label: 'Estatus', align: 'left' },
   { id: '' },
 ];
 
@@ -74,6 +76,10 @@ export default function InvoiceListPage() {
   const { themeStretch } = useSettingsContext();
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const { invoices } = useSelector((state) => state.invoice);
 
   const {
     dense,
@@ -94,7 +100,7 @@ export default function InvoiceListPage() {
     onChangeRowsPerPage,
   } = useTable({ defaultOrderBy: 'createDate' });
 
-  const [tableData, setTableData] = useState(_invoices);
+  const [tableData, setTableData] = useState(invoices);
 
   const [filterName, setFilterName] = useState('');
 
@@ -177,7 +183,7 @@ export default function InvoiceListPage() {
   };
 
   const handleDeleteRow = (id) => {
-    const deleteRow = tableData.filter((row) => row.id !== id);
+    const deleteRow = tableData.filter((row) => row.id_invoice !== id);
     setSelected([]);
     setTableData(deleteRow);
 
@@ -189,7 +195,7 @@ export default function InvoiceListPage() {
   };
 
   const handleDeleteRows = (selectedRows) => {
-    const deleteRows = tableData.filter((row) => !selectedRows.includes(row.id));
+    const deleteRows = tableData.filter((row) => !selectedRows.includes(row.id_invoice));
     setSelected([]);
     setTableData(deleteRows);
 
@@ -220,6 +226,14 @@ export default function InvoiceListPage() {
     setFilterEndDate(null);
     setFilterStartDate(null);
   };
+
+  useEffect(() => {
+    dispatch(getInvoices());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setTableData(invoices);
+  }, [invoices]);
 
   return (
     <>
@@ -361,7 +375,7 @@ export default function InvoiceListPage() {
               onSelectAllRows={(checked) =>
                 onSelectAllRows(
                   checked,
-                  tableData.map((row) => row.id)
+                  tableData.map((row) => row.id_invoice)
                 )
               }
               action={
@@ -405,7 +419,7 @@ export default function InvoiceListPage() {
                   onSelectAllRows={(checked) =>
                     onSelectAllRows(
                       checked,
-                      tableData.map((row) => row.id)
+                      tableData.map((row) => row.id_invoice)
                     )
                   }
                 />
@@ -415,13 +429,13 @@ export default function InvoiceListPage() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => (
                       <InvoiceTableRow
-                        key={row.id}
+                        key={row.id_invoice}
                         row={row}
-                        selected={selected.includes(row.id)}
-                        onSelectRow={() => onSelectRow(row.id)}
-                        onViewRow={() => handleViewRow(row.id)}
-                        onEditRow={() => handleEditRow(row.id)}
-                        onDeleteRow={() => handleDeleteRow(row.id)}
+                        selected={selected.includes(row.id_invoice)}
+                        onSelectRow={() => onSelectRow(row.id_invoice)}
+                        onViewRow={() => handleViewRow(row.id_invoice)}
+                        onEditRow={() => handleEditRow(row.id_invoice)}
+                        onDeleteRow={() => handleDeleteRow(row.id_invoice)}
                       />
                     ))}
 

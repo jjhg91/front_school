@@ -44,8 +44,8 @@ export default function ModalityDetailsPage() {
       component: <AccountGeneral modality={modality}/>,
     },
     {
-      value: 'billing',
-      label: 'Billing',
+      value: 'billing2',
+      label: 'Billing2',
       icon: <Iconify icon="ic:round-receipt" />,
       component: (
         <AccountBilling

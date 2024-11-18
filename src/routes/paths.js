@@ -68,6 +68,32 @@ export const PATH_DASHBOARD = {
     edit: (name) => path(ROOTS_DASHBOARD, `/user/${name}/edit`),
     demoEdit: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
   },
+  student:{
+    root: path(ROOTS_DASHBOARD, '/student/list'),
+    profile: (name) => path(ROOTS_DASHBOARD, `/student/${name}/profile`),
+    list: path(ROOTS_DASHBOARD, '/student/list'),
+    new: path(ROOTS_DASHBOARD, '/student/new'),
+    edit: (name) => path(ROOTS_DASHBOARD, `/student/${name}/edit`),
+  },
+  representative:{
+    root: path(ROOTS_DASHBOARD, '/representative/list'),
+    list: path(ROOTS_DASHBOARD, '/representative/list'),
+    new: path(ROOTS_DASHBOARD, '/representative/new'),
+    edit: (name) => path(ROOTS_DASHBOARD, `/representative/${name}/edit`),
+  },
+  teacher:{
+    root: path(ROOTS_DASHBOARD, '/teacher/list'),
+    profile: (name) => path(ROOTS_DASHBOARD, `/teacher/${name}/profile`),
+    list: path(ROOTS_DASHBOARD, '/teacher/list'),
+    new: path(ROOTS_DASHBOARD, '/teacher/new'),
+    edit: (name) => path(ROOTS_DASHBOARD, `/teacher/${name}/edit`),
+  },
+  staff:{
+    root: path(ROOTS_DASHBOARD, '/staff/list'),
+    list: path(ROOTS_DASHBOARD, '/staff/list'),
+    new: path(ROOTS_DASHBOARD, '/staff/new'),
+    edit: (name) => path(ROOTS_DASHBOARD, `/staff/${name}/edit`),
+  },
   school: {
     root: path(ROOTS_DASHBOARD, '/school'),
     list: path(ROOTS_DASHBOARD, '/school/list'),
@@ -99,8 +125,10 @@ export const PATH_DASHBOARD = {
   period: {
     root: path(ROOTS_DASHBOARD, '/period'),
     list: path(ROOTS_DASHBOARD, '/period/list'),
+    newPeriodOffering: path(ROOTS_DASHBOARD, '/period/new/offering'),
     new: path(ROOTS_DASHBOARD, '/period/new'),
     view: (id) => path(ROOTS_DASHBOARD, `/period/${id}`),
+    editPeriodOffering: (id) => path(ROOTS_DASHBOARD, `/period/${id}/edit/offering`),
     edit: (id) => path(ROOTS_DASHBOARD, `/period/${id}/edit`),
   },
   speciality: {
@@ -116,6 +144,20 @@ export const PATH_DASHBOARD = {
     new: path(ROOTS_DASHBOARD, '/course/new'),
     view: (id) => path(ROOTS_DASHBOARD, `/course/${id}`),
     edit: (id) => path(ROOTS_DASHBOARD, `/course/${id}/edit`),
+  },
+  productService: {
+    root: path(ROOTS_DASHBOARD, '/productService'),
+    list: path(ROOTS_DASHBOARD, '/productService/list'),
+    new: path(ROOTS_DASHBOARD, '/productService/new'),
+    view: (id) => path(ROOTS_DASHBOARD, `/productService/${id}`),
+    edit: (id) => path(ROOTS_DASHBOARD, `/productService/${id}/edit`),
+  },
+  preEnrollment: {
+    root: path(ROOTS_DASHBOARD, '/preEnrollment'),
+    list: path(ROOTS_DASHBOARD, '/preEnrollment/list'),
+    view: (id) => path(ROOTS_DASHBOARD, `/preEnrollment/${id}`),
+    new: (id) => path(ROOTS_DASHBOARD, `/preEnrollment/${id}/new`),
+    edit: (id) => path(ROOTS_DASHBOARD, `/preEnrollment/${id}/edit`),
   },
   eCommerce: {
     root: path(ROOTS_DASHBOARD, '/e-commerce'),

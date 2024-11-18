@@ -60,10 +60,9 @@ const SERVICE_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name', align: 'left' },
-  { id: 'dateStart', label: 'Date Start', align: 'left' },
-  { id: 'dateEnd', label: 'Date End', align: 'left' },
-  { id: 'createdAt', label: 'Create', align: 'left' },
+  { id: 'prefix', label: 'Prefijo', align: 'left' },
+  { id: 'name', label: 'Nombre', align: 'left' },
+  { id: 'description', label: 'Descripcion', align: 'left' },
   { id: 'isActive', label: 'Status', align: 'left' },
   { id: '' },
 ];
@@ -265,7 +264,7 @@ export default function SpecialityListPage() {
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Invoice
+              Nueva especialidad
             </Button>
           }
         />

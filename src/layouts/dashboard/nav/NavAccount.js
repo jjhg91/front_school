@@ -27,7 +27,7 @@ export default function NavAccount() {
   return (
     <Link component={RouterLink} to={PATH_DASHBOARD.user.account} underline="none" color="inherit">
       <StyledRoot>
-        <CustomAvatar src={user?.photoUrl} alt={user?.displayName} name={user?.displayName} />
+        <CustomAvatar src='https://avatar.iran.liara.run/public' alt={user?.displayName} name={user?.displayName} />
 
         <Box sx={{ ml: 2, minWidth: 0 }}>
           <Typography variant="subtitle2" noWrap>
@@ -36,7 +36,11 @@ export default function NavAccount() {
 
           <Typography variant="body2" noWrap sx={{ color: 'text.secondary' }}>
             
-            {!user?.role ? 'Sin rol asignado' : user?.role}
+            {
+              !user?.UserRole || user.UserRole.length === 0
+                ? 'Sin rol asignado'
+                : user.UserRole.map(element => element.Role.description).join(', ')
+            }
           </Typography>
         </Box>
       </StyledRoot>

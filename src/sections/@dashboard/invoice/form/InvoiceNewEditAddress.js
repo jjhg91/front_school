@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 // form
 import { useFormContext } from 'react-hook-form';
 // @mui
@@ -13,9 +13,17 @@ import Iconify from '../../../../components/iconify';
 //
 import InvoiceAddressListDialog from './InvoiceAddressListDialog';
 
+// redux
+import { useDispatch, useSelector } from '../../../../redux/store';
+import { getStudents } from '../../../../redux/slices/student';
+
 // ----------------------------------------------------------------------
 
 export default function InvoiceNewEditAddress() {
+  const dispatch = useDispatch();
+
+  const { students, isLoading } = useSelector((state) => state.student);
+
   const {
     watch,
     setValue,
@@ -48,6 +56,10 @@ export default function InvoiceNewEditAddress() {
     setOpenTo(false);
   };
 
+  useEffect(() => {
+    dispatch(getStudents());
+  }, [dispatch]);
+
   return (
     <Stack
       spacing={{ xs: 2, md: 5 }}
@@ -64,7 +76,7 @@ export default function InvoiceNewEditAddress() {
       <Stack sx={{ width: 1 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
           <Typography variant="h6" sx={{ color: 'text.disabled' }}>
-            From:
+            De:
           </Typography>
 
           <Button
@@ -80,18 +92,19 @@ export default function InvoiceNewEditAddress() {
             onClose={handleCloseFrom}
             selected={(selectedId) => invoiceFrom?.id === selectedId}
             onSelect={(address) => setValue('invoiceFrom', address)}
-            addressOptions={_invoiceAddressFrom}
+            // addressOptions={_invoiceAddressFrom}
+            addressOptions={students}
           />
         </Stack>
 
         <AddressInfo
-          name={invoiceFrom.name}
-          address={invoiceFrom.address}
-          phone={invoiceFrom.phone}
+          name={`${invoiceFrom?.User?.first_surname || ''} ${invoiceFrom?.User?.second_surname || ''} ${invoiceFrom?.User?.first_name || ''} ${invoiceFrom?.User?.second_name || ''}`}
+          address={invoiceFrom?.User?.address || ''}
+          phone={invoiceFrom?.User?.phoneNumber_1 || ''}
         />
       </Stack>
 
-      <Stack sx={{ width: 1 }}>
+      {/* <Stack sx={{ width: 1 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
           <Typography variant="h6" sx={{ color: 'text.disabled' }}>
             To:
@@ -121,7 +134,7 @@ export default function InvoiceNewEditAddress() {
             {errors.invoiceTo?.message}
           </Typography>
         )}
-      </Stack>
+      </Stack> */}
     </Stack>
   );
 }

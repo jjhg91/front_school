@@ -8,7 +8,7 @@ import { RHFSelect, RHFTextField } from '../../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = ['paid', 'unpaid', 'overdue', 'draft'];
+const STATUS_OPTIONS = ['Pagado', 'Abonado', 'No pagado', 'Presupuesto'];
 
 // ----------------------------------------------------------------------
 
@@ -30,14 +30,14 @@ export default function InvoiceNewEditStatusDate() {
         value={`INV-${values.invoiceNumber}`}
       />
 
-      <RHFSelect fullWidth name="status" label="Status" InputLabelProps={{ shrink: true }}>
+      <RHFSelect fullWidth name="status" label="Estatus" InputLabelProps={{ shrink: true }}>
         {STATUS_OPTIONS.map((option) => (
           <MenuItem key={option} value={option}>
             {option}
           </MenuItem>
         ))}
       </RHFSelect>
-
+{/* 
       <Controller
         name="createDate"
         control={control}
@@ -53,7 +53,7 @@ export default function InvoiceNewEditStatusDate() {
             )}
           />
         )}
-      />
+      /> */}
 
       <Controller
         name="dueDate"

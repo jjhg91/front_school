@@ -8,13 +8,14 @@ import { fData } from '../../../../utils/formatNumber';
 // components
 // import { useSnackbar } from '../../../../components/snackbar';
 import { CustomAvatar } from '../../../../components/custom-avatar';
-import { fDate } from 'src/utils/formatTime';
+import { fDate } from '../../../../utils/formatTime';
 import Iconify from '../../../../components/iconify';
 
 // ----------------------------------------------------------------------
 AccountGeneral.propTypes = {
   course: PropTypes.object
 };
+
 
 export default function AccountGeneral({course}) {
 
@@ -98,12 +99,12 @@ export default function AccountGeneral({course}) {
             <CardHeader title="Specialitys"/>
             <CardContent>
               <Stack spacing={5} alignItems="flex-start">
-                {!course?.CourseSpeciality ?"":
-                course.CourseSpeciality.map((cs,key) => {
+                {/* {!course?.CourseSpeciality ?"":
+                course?.CourseSpeciality.map((cs,key) => {
                   return(
                     <Typography key={key} variant="body2">{cs.Speciality.name}</Typography>
                   )
-                })}
+                })} */}
               </Stack>
             </CardContent>
             </Card>

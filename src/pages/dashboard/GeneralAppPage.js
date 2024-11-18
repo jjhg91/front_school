@@ -27,10 +27,29 @@ import {
   AppCurrentDownload,
   AppTopInstalledCountries,
 } from '../../sections/@dashboard/general/app';
+//
+import {
+  FileGeneralDataActivity
+} from '../../sections/@dashboard/general/file';
+// sections
+import {
+  BookingRoomAvailable,
+  BookingWidgetSummary
+} from '../../sections/@dashboard/general/booking';
 // assets
-import { SeoIllustration } from '../../assets/illustrations';
+import {
+  SeoIllustration,
+  BookingIllustration,
+  CheckInIllustration,
+  CheckOutIllustration, } from '../../assets/illustrations';
 
 // ----------------------------------------------------------------------
+const TIME_LABELS = {
+  week: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
+  month: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  year: ['2018', '2019', '2020', '2021', '2022'],
+};
+
 
 export default function GeneralAppPage() {
   const { user } = useAuthContext();
@@ -42,15 +61,15 @@ export default function GeneralAppPage() {
   return (
     <>
       <Helmet>
-        <title> General: App | Minimal UI</title>
+        <title> Dashboard: Inicio | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={12}>
             <AppWelcome
-              title={`Welcome back! \n ${user?.displayName}`}
-              description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
+              title={`¡Bienvenido de nuevo! \n ${user?.first_name} ${user?.first_surname}`}
+              description="Nos alegra verte de vuelta. Aquí tienes acceso a tus datos más importantes, presentados de manera clara y concisa para que puedas tomar decisiones estratégicas con confianza. Explora las tendencias, analiza el rendimiento y descubre nuevas oportunidades para impulsar tu éxito. ¡Estamos aquí para apoyarte en cada paso del camino!"
               img={
                 <SeoIllustration
                   sx={{
@@ -60,89 +79,87 @@ export default function GeneralAppPage() {
                   }}
                 />
               }
-              action={<Button variant="contained">Go Now</Button>}
+              // action={<Button variant="contained">Go Now</Button>}
             />
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          {/* <Grid item xs={12} md={4}>
             <AppFeatured list={_appFeatured} />
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} md={4}>
-            <AppWidgetSummary
-              title="Total Active Users"
-              percent={2.6}
-              total={18765}
-              chart={{
-                colors: [theme.palette.primary.main],
-                series: [5, 18, 12, 51, 68, 11, 39, 37, 27, 20],
-              }}
+             <BookingWidgetSummary
+              title="Total Profesores Activos"
+              total={714000}
+              icon={<BookingIllustration />}
             />
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <AppWidgetSummary
-              title="Total Installed"
-              percent={0.2}
-              total={4876}
-              chart={{
-                colors: [theme.palette.info.main],
-                series: [20, 41, 63, 33, 28, 35, 50, 46, 11, 26],
-              }}
+            <BookingWidgetSummary
+              title="Total Estudiantes Activos"
+              total={714000}
+              icon={<CheckInIllustration />}
             />
           </Grid>
 
           <Grid item xs={12} md={4}>
-            <AppWidgetSummary
-              title="Total Downloads"
-              percent={-0.1}
-              total={678}
-              chart={{
-                colors: [theme.palette.warning.main],
-                series: [8, 9, 31, 8, 16, 37, 8, 33, 46, 31],
-              }}
+            <BookingWidgetSummary
+              title="Total Representantes Activos"
+              total={714000}
+              icon={<CheckOutIllustration />}
             />
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            <AppCurrentDownload
-              title="Current Download"
+            <BookingRoomAvailable
+              title="Estatus de Facturas"
               chart={{
-                colors: [
-                  theme.palette.primary.main,
-                  theme.palette.info.main,
-                  theme.palette.error.main,
-                  theme.palette.warning.main,
-                ],
                 series: [
-                  { label: 'Mac', value: 12244 },
-                  { label: 'Window', value: 53345 },
-                  { label: 'iOS', value: 44313 },
-                  { label: 'Android', value: 78343 },
+                  { label: 'Sold out', value: 120 },
+                  { label: 'Available', value: 66 },
                 ],
               }}
             />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
-            <AppAreaInstalled
-              title="Area Installed"
-              subheader="(+43%) than last year"
+            <FileGeneralDataActivity
+              title="Facturdos"
               chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                labels: TIME_LABELS,
+                colors: [
+                  theme.palette.primary.main,
+                  theme.palette.error.main,
+                  theme.palette.warning.main,
+                  theme.palette.text.disabled,
+                ],
                 series: [
                   {
-                    year: '2019',
+                    type: 'Week',
                     data: [
-                      { name: 'Asia', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] },
-                      { name: 'America', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
+                      { name: 'Inscripciones', data: [20, 34, 48, 65, 37, 48] },
+                      { name: 'Mensualidades', data: [10, 34, 13, 26, 27, 28] },
+                      { name: 'Constancias de estudio', data: [10, 14, 13, 16, 17, 18] },
+                      { name: 'Notas Certificadas', data: [5, 12, 6, 7, 8, 9] },
                     ],
                   },
                   {
-                    year: '2020',
+                    type: 'Month',
                     data: [
-                      { name: 'Asia', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
-                      { name: 'America', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] },
+                      { name: 'Inscripciones', data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 12, 43, 34] },
+                      { name: 'Mensualidades', data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 12, 43, 34] },
+                      { name: 'Constancias de estudio', data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 12, 43, 34] },
+                      { name: 'Notas Certificadas', data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 12, 43, 34] },
+                    ],
+                  },
+                  {
+                    type: 'Year',
+                    data: [
+                      { name: 'Inscripciones', data: [10, 34, 13, 56, 77] },
+                      { name: 'Mensualidades', data: [10, 34, 13, 56, 77] },
+                      { name: 'Constancias de estudio', data: [10, 34, 13, 56, 77] },
+                      { name: 'Notas Certificadas', data: [10, 34, 13, 56, 77] },
                     ],
                   },
                 ],

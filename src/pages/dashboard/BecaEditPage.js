@@ -18,7 +18,6 @@ import { getBeca, updateBeca } from '../../redux/slices/beca';
 // ----------------------------------------------------------------------
 
 export default function BecaEditPage() {
-
   const dispatch = useDispatch();
 
   const { beca } = useSelector((state) => state.beca);
@@ -33,7 +32,7 @@ export default function BecaEditPage() {
 
   useEffect(() => {
     dispatch(getBeca(id));
-  }, [dispatch,id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     setCurrentBeca(beca);
@@ -61,8 +60,12 @@ export default function BecaEditPage() {
           ]}
         />
 
-        <BecaNewEditForm isEdit currentBeca={currentBeca}  updateBeca={updateBeca} dispatch={dispatch} />
-     
+        <BecaNewEditForm
+          isEdit
+          currentBeca={currentBeca}
+          updateBeca={updateBeca}
+          dispatch={dispatch}
+        />
       </Container>
     </>
   );

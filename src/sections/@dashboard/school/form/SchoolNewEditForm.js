@@ -48,21 +48,23 @@ export default function SchoolNewEditForm({ isEdit = false, currentSchool, updat
   const { enqueueSnackbar } = useSnackbar();
 
   const NewSchoolSchema = Yup.object().shape({
-    description: Yup.string().required('Name school is required'),
-    abbreviation: Yup.string().required('Abbreviationis required'),
-    rif: Yup.string().required('Rif school is required'),
-    address: Yup.string().required('Address is required'),
-    name_contact: Yup.string().required('Name contacto school is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    phoneNumber_1: Yup.string().required('Phone Number 1 is required'),
+    abbreviation: Yup.string().required('La abreviacion o prefijo es requerido'),
+    name_school: Yup.string().required('El nombre es requerido'),
+    description: Yup.string().required('La descripcion es requerida'),
+    rif: Yup.string().required('El rifes requerido'),
+    address: Yup.string().required('La direccion es requerida'),
+    name_contact: Yup.string().required('El nombre del contacto en el colegio es requerido'),
+    email: Yup.string().required('Email is required').email('El email del contacto en el colegio es requerido'),
+    phoneNumber_1: Yup.string().required('El numero de telefono del contacto en el colegio es requerido'),
     phoneNumber_2: Yup.string().nullable(true),
     logoUrl: Yup.string().nullable(true),
     });
 
   const defaultValues = useMemo(
     () => ({
-      description: currentSchool?.description || '',
       abbreviation: currentSchool?.abbreviation || '',
+      name_school: currentSchool?.name_school || '',
+      description: currentSchool?.description || '',
       rif: currentSchool?.rif || '',
       address: currentSchool?.address || '',
       name_contact: currentSchool?.name_contact || '',
@@ -231,25 +233,15 @@ export default function SchoolNewEditForm({ isEdit = false, currentSchool, updat
                 sm: 'repeat(2, 1fr)',
               }}
             >
-              <RHFTextField name="description" label="Name school" />
-              <RHFTextField name="abbreviation" label="Abbreviation name school" />
-              <RHFTextField name="rif" label="rif school" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="name_contact" label="Name contact school" />
-              <RHFTextField name="email" label="Email" />
-              <RHFTextField name="phoneNumber_1" label="Phone Number 1" />
-              <RHFTextField name="phoneNumber_2" label="Phone Number 2" />
-             
-{/* 
-              <RHFSelect native name="country" label="Country" placeholder="Country">
-                <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
-                  </option>
-                ))}
-              </RHFSelect> */}
-
+              <RHFTextField name="abbreviation" label="Abreviacion" />
+              <RHFTextField name="name_school" label="Nombre" />
+              <RHFTextField name="description" label="Descripcion" sx={{gridColumn: 'span 2'}}/>
+              <RHFTextField name="rif" label="Rif" />
+              <RHFTextField name="address" label="Direccion" />
+              <RHFTextField name="name_contact" label="Nombre de contacto" />
+              <RHFTextField name="email" label="Email de contactp" />
+              <RHFTextField name="phoneNumber_1" label="Numbero de contacto" />
+              <RHFTextField name="phoneNumber_2" label="Numbero de contacto (alternativo)" />
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>

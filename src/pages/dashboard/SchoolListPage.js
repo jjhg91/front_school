@@ -263,7 +263,7 @@ export default function SchoolListPage() {
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Invoice
+              Nuevo colegio
             </Button>
           }
         />

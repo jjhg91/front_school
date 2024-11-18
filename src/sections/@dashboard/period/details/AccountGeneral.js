@@ -8,7 +8,7 @@ import { fData } from '../../../../utils/formatNumber';
 // components
 // import { useSnackbar } from '../../../../components/snackbar';
 import { CustomAvatar } from '../../../../components/custom-avatar';
-import { fDate } from 'src/utils/formatTime';
+import { fDate } from '../../../../utils/formatTime';
 
 // ----------------------------------------------------------------------
 AccountGeneral.propTypes = {

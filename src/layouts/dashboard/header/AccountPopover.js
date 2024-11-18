@@ -84,7 +84,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <CustomAvatar src={user?.photoUrl} alt={user?.displayName} name={user?.displayName} />
+        <CustomAvatar src='https://avatar.iran.liara.run/public' alt={user?.displayName} name={user?.displayName} />
       </IconButtonAnimate>
 
       <MenuPopover open={openPopover} onClose={handleClosePopover} sx={{ width: 200, p: 0 }}>

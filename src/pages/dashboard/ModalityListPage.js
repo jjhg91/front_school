@@ -238,12 +238,12 @@ export default function ModalityListPage() {
   return (
     <>
       <Helmet>
-        <title> Modality: List | Minimal UI</title>
+        <title> TUrno: Lista | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Modality List"
+          heading="Turno Lista"
           links={[
             {
               name: 'Dashboard',
@@ -264,7 +264,7 @@ export default function ModalityListPage() {
               variant="contained"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Modality
+              Nuevo turno
             </Button>
           }
         />

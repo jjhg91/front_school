@@ -30,6 +30,7 @@ import {
 // redux
 import { useDispatch, useSelector } from '../../redux/store';
 import { getUser } from '../../redux/slices/user';
+import { ProfileToolbar } from '../../sections/@dashboard/student/profile';
 
 // ----------------------------------------------------------------------
 
@@ -99,6 +100,8 @@ export default function UserProfilePage() {
             { name: `${user?.first_name} ${user?.first_surname}` },
           ]}
         />
+        <ProfileToolbar student={user} />
+
         <Card
           sx={{
             mb: 3,
@@ -106,6 +109,8 @@ export default function UserProfilePage() {
             position: 'relative',
           }}
         >
+          
+          
           <ProfileCover name={`${user?.first_name} ${user?.first_surname}`} role={!user?.role? 'Sin rol asignado': user?.role} cover={_userAbout.cover} />
 
           <Tabs

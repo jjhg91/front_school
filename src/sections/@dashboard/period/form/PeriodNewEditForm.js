@@ -104,7 +104,6 @@ export default function PeriodNewEditForm({ isEdit = false, currentPeriod, updat
       reset();
       enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
       navigate(PATH_DASHBOARD.period.list);
-      console.log('DATA', data);
     } catch (error) {
       console.error(error);
     }
